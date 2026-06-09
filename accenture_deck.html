@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interior Décor Campaign — Optimization Strategy</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<style>
+/* ── Fonts ── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* ── Root palette (Accenture-inspired) ── */
+:root {
+  --purple:      #a100ff;
+  --purple-dk:   #6600cc;
+  --purple-lt:   #cc66ff;
+  --purple-bg:   rgba(161,0,255,.10);
+  --dark:        #1a1a1a;
+  --dark2:       #2a2a2a;
+  --white:       #ffffff;
+  --off-white:   #f7f4fc;
+  --muted:       #6b6470;
+  --border:      #e2d9ee;
+  --red:         #e63946;
+  --green:       #2ec4b6;
+  --amber:       #f4a261;
+}
+
+.reveal { font-family: 'Inter', 'Segoe UI', Arial, sans-serif; }
+
+/* ── Slide base ── */
+.reveal .slides section {
+  text-align: left;
+  padding: 0;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* ── HERO slides (dark) ── */
+.hero {
+  background: var(--dark) !important;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px 72px !important;
+}
+.hero .eyebrow {
+  display: inline-block;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--purple-lt);
+  background: rgba(161,0,255,.18);
+  border: 1px solid rgba(161,0,255,.4);
+  padding: 5px 14px;
+  border-radius: 999px;
+  margin-bottom: 20px;
+}
+.hero h1 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.15;
+  margin: 0 0 16px;
+  letter-spacing: -.5px;
+}
+.hero .deck-sub {
+  font-size: 1rem;
+  color: #b0a8bb;
+  margin: 0 0 36px;
+}
+.hero .meta-row {
+  display: flex;
+  gap: 32px;
+  font-size: .82rem;
+  color: #888;
+  border-top: 1px solid #333;
+  padding-top: 20px;
+  margin-top: auto;
+}
+.hero .meta-row strong { color: #ccc; }
+
+/* ── CONTENT slides ── */
+.content {
+  background: var(--off-white) !important;
+  display: flex !important;
+  flex-direction: column;
+  padding: 0 !important;
+  overflow: hidden;
+}
+.slide-header {
+  background: var(--dark);
+  padding: 18px 48px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+.slide-header .num {
+  background: var(--purple);
+  color: #fff;
+  font-size: .82rem;
+  font-weight: 700;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.slide-header h2 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+  letter-spacing: -.1px;
+}
+.slide-header .tag {
+  margin-left: auto;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--purple-lt);
+  background: rgba(161,0,255,.18);
+  border: 1px solid rgba(161,0,255,.35);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+.slide-body {
+  padding: 26px 48px 24px;
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Typography ── */
+.reveal .slides p { margin: 0; }
+.lead {
+  font-size: .9rem;
+  color: var(--muted);
+  line-height: 1.55;
+  margin-bottom: 18px;
+}
+
+/* ── Bullet lists ── */
+.blist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.blist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: .86rem;
+  color: #1a1a1a;
+  line-height: 1.5;
+}
+.blist li::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  min-width: 7px;
+  border-radius: 50%;
+  background: var(--purple);
+  margin-top: 6px;
+}
+.blist li strong { color: var(--purple-dk); }
+.blist li em { color: var(--muted); font-style: normal; font-size: .82rem; }
+
+/* ── Callout box ── */
+.callout {
+  background: var(--purple-bg);
+  border-left: 3px solid var(--purple);
+  border-radius: 0 10px 10px 0;
+  padding: 13px 16px;
+  font-size: .86rem;
+  color: var(--dark);
+  line-height: 1.5;
+  margin: 12px 0 0;
+}
+.callout strong { color: var(--purple-dk); }
+
+.callout-green {
+  background: rgba(46,196,182,.10);
+  border-color: var(--green);
+}
+.callout-green strong { color: #1a7a73; }
+
+.callout-amber {
+  background: rgba(244,162,97,.12);
+  border-color: var(--amber);
+}
+.callout-amber strong { color: #b56b1e; }
+
+/* ── Two-column layout ── */
+.cols { display: grid; gap: 20px; }
+.cols-2 { grid-template-columns: 1fr 1fr; }
+.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+/* ── Stat cards ── */
+.stat-row { display: flex; gap: 14px; margin-bottom: 16px; }
+.stat {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 13px 16px;
+  flex: 1;
+  box-shadow: 0 2px 8px rgba(0,0,0,.05);
+}
+.stat .s-val {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: var(--purple-dk);
+  letter-spacing: -.5px;
+  line-height: 1;
+}
+.stat .s-label { font-size: .72rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .5px; margin-top: 4px; }
+.stat .s-note  { font-size: .72rem; color: var(--muted); margin-top: 2px; }
+
+/* ── Tables ── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .8rem;
+}
+th {
+  background: var(--dark);
+  color: #fff;
+  padding: 8px 12px;
+  text-align: left;
+  font-weight: 600;
+  font-size: .75rem;
+  letter-spacing: .3px;
+}
+td {
+  padding: 7px 12px;
+  border-bottom: 1px solid var(--border);
+  color: #1a1a1a;
+  vertical-align: middle;
+}
+tr:nth-child(even) td { background: rgba(161,0,255,.04); }
+.chip {
+  display: inline-block;
+  font-size: .68rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+.chip-green  { background: rgba(46,196,182,.15); color: #1a7a73; }
+.chip-amber  { background: rgba(244,162,97,.18); color: #b56b1e; }
+.chip-red    { background: rgba(230,57,70,.12);  color: #c0112a; }
+.chip-purple { background: rgba(161,0,255,.13);  color: var(--purple-dk); }
+
+/* ── Section divider slides ── */
+.divider {
+  background: linear-gradient(135deg, var(--dark) 60%, #2d0066) !important;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px 72px !important;
+}
+.divider .div-num {
+  font-size: 4rem;
+  font-weight: 800;
+  color: rgba(161,0,255,.25);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.divider h2 {
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 12px;
+}
+.divider p { font-size: .9rem; color: #a090b0; margin: 0; }
+
+/* ── Timeline / Roadmap ── */
+.phases { display: flex; flex-direction: column; gap: 12px; }
+.phase {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 13px 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.04);
+}
+.phase .p-num {
+  background: var(--purple);
+  color: #fff;
+  font-size: .78rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.phase .p-title { font-size: .84rem; font-weight: 700; color: var(--dark); margin-bottom: 3px; }
+.phase .p-detail { font-size: .78rem; color: var(--muted); line-height: 1.45; }
+.phase .p-time {
+  margin-left: auto;
+  font-size: .72rem;
+  font-weight: 700;
+  color: var(--purple-dk);
+  background: var(--purple-bg);
+  border-radius: 6px;
+  padding: 3px 8px;
+  flex-shrink: 0;
+  align-self: flex-start;
+  margin-top: 2px;
+}
+
+/* ── Risk rows ── */
+.risk-row { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; }
+.risk-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.risk-content .r-title { font-size: .84rem; font-weight: 700; color: var(--dark); }
+.risk-content .r-mit { font-size: .78rem; color: var(--muted); margin-top: 2px; }
+
+/* ── Summary "so what" box ── */
+.sowhat {
+  background: var(--dark);
+  border-radius: 12px;
+  padding: 18px 20px;
+  color: #fff;
+  font-size: .86rem;
+  line-height: 1.6;
+  margin-top: 14px;
+}
+.sowhat span { color: var(--purple-lt); font-weight: 600; }
+
+/* ── Confidence matrix ── */
+.conf-row {
+  display: grid;
+  grid-template-columns: 110px 1fr 1fr;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: .8rem;
+}
+.conf-badge {
+  font-size: .7rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  text-align: center;
+}
+.conf-high { background: rgba(46,196,182,.15); color: #1a7a73; }
+.conf-low  { background: rgba(244,162,97,.18); color: #b56b1e; }
+.conf-open { background: rgba(230,57,70,.12);  color: #c0112a; }
+.conf-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; line-height: 1.4; }
+.conf-item strong { display: block; color: var(--dark); margin-bottom: 2px; }
+.conf-item span { color: var(--muted); font-size: .75rem; }
+
+/* ── Appendix ── */
+.qa-item { margin-bottom: 14px; }
+.qa-q { font-size: .84rem; font-weight: 700; color: var(--purple-dk); margin-bottom: 4px; }
+.qa-a { font-size: .8rem; color: #333; line-height: 1.5; background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 9px 13px; }
+
+/* ── Print to PDF ── */
+@media print {
+  body { background: #fff; }
+  .reveal .slides section { page-break-after: always; }
+}
+
+/* ── Funnel diagram ── */
+.funnel { display: flex; flex-direction: column; gap: 8px; }
+.f-stage {
+  border-radius: 10px;
+  padding: 12px 18px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  border: 1px solid var(--border);
+  background: #fff;
+}
+.f-label {
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.f-top    .f-label { background: rgba(161,0,255,.13); color: var(--purple-dk); }
+.f-mid    .f-label { background: rgba(244,162,97,.18); color: #b56b1e; }
+.f-bottom .f-label { background: rgba(46,196,182,.15); color: #1a7a73; }
+.f-content .f-title { font-size: .84rem; font-weight: 700; color: var(--dark); margin-bottom: 3px; }
+.f-content .f-detail { font-size: .78rem; color: var(--muted); line-height: 1.4; }
+
+/* ── Dashboard link ── */
+.dashboard-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 22px 0 28px;
+  padding: 11px 20px;
+  background: rgba(161,0,255,.12);
+  border: 1px solid rgba(161,0,255,.4);
+  border-radius: 12px;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+  cursor: pointer;
+  width: fit-content;
+}
+.dashboard-link:hover {
+  background: rgba(161,0,255,.22);
+  border-color: rgba(161,0,255,.75);
+  transform: translateY(-2px);
+}
+.dashboard-link .dl-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--purple), var(--purple-dk));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1rem;
+}
+.dashboard-link .dl-text { line-height: 1.3; }
+.dashboard-link .dl-label {
+  font-size: .75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--purple-lt);
+}
+.dashboard-link .dl-title {
+  font-size: .9rem;
+  font-weight: 600;
+  color: #fff;
+}
+.dashboard-link .dl-arrow {
+  margin-left: 6px;
+  font-size: .9rem;
+  color: var(--purple-lt);
+  flex-shrink: 0;
+}
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ════════════════════════════════════════════
+     SLIDE 1 — TITLE
+════════════════════════════════════════════ -->
+<section class="hero">
+  <span class="eyebrow">Digital Marketing Strategy</span>
+  <h1>Interior Décor Campaign<br>Performance Review &amp; Optimization</h1>
+  <p class="deck-sub">A data-driven strategy to sharpen what's already working</p>
+
+  <a class="dashboard-link" href="https://yyx980088.github.io/ad-campaign-dashboard/" target="_blank" rel="noopener">
+    <div class="dl-icon">📊</div>
+    <div class="dl-text">
+      <div class="dl-label">Supporting Data</div>
+      <div class="dl-title">Interactive Campaign Dashboard</div>
+    </div>
+    <div class="dl-arrow">↗</div>
+  </a>
+
+  <div class="meta-row">
+    <div><strong>Campaign period</strong><br>Jan 24 – Oct 15 · 10 campaigns</div>
+    <div><strong>Channel</strong><br>Paid Digital</div>
+    <div><strong>Focus</strong><br>Audience efficiency · Seasonal timing · ROI growth</div>
+  </div>
+  <aside class="notes">
+    Open with energy. "I'll lead with where I landed, then walk you through the evidence."
+    This signals pyramid thinking immediately.
+  </aside>
+</section>
+
+<!-- ════════════════════════════════════════════
+     SLIDE 2 — EXECUTIVE SUMMARY
+════════════════════════════════════════════ -->
+<section class="content">
+  <div class="slide-header">
+    <div class="num">ES</div>
+    <h2>Executive Summary — Here's my bottom line</h2>
+    <span class="tag">Answer First</span>
+  </div>
+  <div class="slide-body">
+    <div class="stat-row">
+      <div class="stat">
+        <div class="s-val">~8×</div>
+        <div class="s-label">Avg. Return on Ad Spend</div>
+        <div class="s-note">$7.90–$9.10 profit per $1 spent</div>
+      </div>
+      <div class="stat">
+        <div class="s-val">813%</div>
+        <div class="s-label">Average ROI</div>
+        <div class="s-note">Range: 673% – 1,100%</div>
+      </div>
+      <div class="stat">
+        <div class="s-val">$16,900</div>
+        <div class="s-label">Total Revenue Generated</div>
+        <div class="s-note">Across $1,896 in total spend</div>
+      </div>
+      <div class="stat">
+        <div class="s-val">33.3%</div>
+        <div class="s-label">Peak CTR</div>
+        <div class="s-note">Men 45-54, Jun 19</div>
+      </div>
+    </div>
+    <ul class="blist">
+      <li>This campaign is <strong>already profitable</strong> — the goal here is to make it work harder, not fix something broken</li>
+      <li>The data reveals a key tension: <strong>the audiences that click the most are not the ones that buy the most</strong> — one metric alone would send strategy in the wrong direction</li>
+      <li>Spend is currently distributed evenly across months that <strong>perform very unevenly</strong> — two clear seasonal peaks are being underserved</li>
+    </ul>
+    <div class="callout" style="margin-top:12px;">
+      <strong>My recommendation in one sentence:</strong> Restructure budget by audience <em>role</em> (engagement vs. conversion) and shift timing <em>ahead</em> of seasonal demand peaks — same budget, working harder. Projected directional uplift: $100–150 in incremental revenue from re-timing alone.
+    </div>
+  </div>
+  <aside class="notes">
+    "I'll give you my conclusion first, then the evidence. The campaign is healthy — 8x return. The opportunity is sharpening it. Three moves: re-role the audiences, re-time the spend, and test the one thing I'm not yet sure about. I'll walk you through all three."
+  </aside>
+</section>
+
+<!-- ════════════════════════════════════════════
+     SLIDE 3 — CLIENT OVERVIEW
+════════════════════════════════════════════ -->
+<section class="content">
+  <div class="slide-header">
+    <div class="num">1</div>
+    <h2>Client Overview</h2>
+    <span class="tag">Context</span>
+  </div>
+  <div class="slide-body">
+    <div class="cols cols-2" style="gap:18px; flex:1;">
+      <div>
+        <p class="lead" style="margin-bottom:12px;">The client is an interior décor brand running a 10-month national paid digital campaign — a category where purchase decisions are driven by <strong>life moments</strong> and seasonal cycles, not continuous demand.</p>
+        <ul class="blist">
+          <li><strong>Campaign window:</strong> January – October (10 data points)</li>
+          <li><strong>Audience scope:</strong> Mixed gender, ages 18–54 across four age bands</li>
+          <li><strong>True objective:</strong> Convert ad spend into purchase revenue — efficiently, not just visibly</li>
+          <li><strong>Category behaviour:</strong> Interior décor tracks closely to home-life events — moving, spring refreshes, pre-holiday styling</li>
+        </ul>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <div class="callout">
+          <strong>Why the objective framing matters:</strong> Optimising for reach or CTR alone without anchoring to revenue conversion would actively mislead strategy. Every recommendation here is graded on whether it moves the business outcome — not just the campaign metric.
+        </div>
+        <div class="callout callout-amber">
+          <strong>A note on the data:</strong> We have 10 campaign data points, each pairing a single month with a single demographic segment. Several segments appear only once. I'll flag explicitly where this limits confidence.
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    "Quick context — but I want to flag something here that shapes the whole analysis. The objective isn't reach, it's profitable conversion. And this is a category where people buy in moments — spring cleaning, moving in, getting ready for holidays — so timing is likely as important as audience. Both of those instincts showed up in the data."
+  </aside>
+</section>
+
+<!-- ════════════════════════════════════════════
+     SLIDE 4 — THE CORE FINDING
+════════════════════════════════════════════ -->
+<section class="content">
+  <div class="slide-header">
+    <div class="num">2</div>
+    <h2>The Core Finding — Engagement and Revenue point in opposite directions</h2>
+    <span class="tag">Key Insight</span>
+  </div>
+  <div class="slide-body">
+    <div class="cols cols-2" style="flex:1; gap:20px;">
+      <div>
+        <p style="font-size:.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.8px; color:var(--muted); margin-bottom:8px;">Ranked by CTR — who clicks the most</p>
+        <table>
+          <thead><tr><th>Segment</th><th>CTR</th><th>Revenue</th></tr></thead>
+          <tbody>
+            <tr><td>Men, 45-54</td><td><strong>33.3%</strong> <span class="chip chip-green">↑ High</span></td><td>$1,600</td></tr>
+            <tr><td>Men, 35-44</td><td>32.7% <span class="chip chip-green">↑ High</span></td><td>$1,500</td></tr>
+            <tr><td>Men, 18-24</td><td>32.3% <span class="chip chip-green">↑ High</span></td><td>$1,700</td></tr>
+            <tr><td>Women, 18-24</td><td>31.0% avg</td><td><strong>$3,600</strong> <span class="chip chip-purple">↑ Top</span></td></tr>
+            <tr><td>Women, 25-34</td><td>30.3% avg</td><td><strong>$3,500</strong> <span class="chip chip-purple">↑ Top</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <div class="callout">
+          <strong>The insight:</strong> Optimising purely for CTR (male segments at 32-33%) would direct budget away from the audiences generating the most cumulative revenue (Women 18-34 at $3,500-3,600). One metric alone actively misleads the strategy.
+        </div>
+        <div class="callout callout-green">
+          <strong>What this unlocks:</strong> These two groups aren't competing — they serve different funnel roles. Male segments are efficient at generating reach and clicks. Female 18-34 segments are efficient at converting that engagement into revenue. The strategy should use both, for different jobs.
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    "This is the central insight — and the reason I didn't just rank segments by one number. If you go by CTR, you'd invest in men. If you go by revenue, you'd invest in women 18-34. The data is telling us both are right — just for different reasons. That's the foundation for the full-funnel strategy coming up."
+    Pause here. Let the tension land before moving on.
+  </aside>
+</section>
+
+<!-- ════════════════════════════════════════════
+     SLIDE 5 — STRATEGY
+════════════════════════════════════════════ -->
+<section class="content">
+  <div class="slide-header">
+    <div class="num">3</div>
+    <h2>Strategy — A Full-Funnel Approach Built on That Insight</h2>
+    <span class="tag">Recommendation</span>
+  </div>
+  <div class="slide-body">
+    <p class="lead">Rather than one generic campaign to everyone, restructure spend so each audience is doing the job it's statistically best suited for.</p>
+    <div class="funnel" style="flex:1;">
+      <div class="f-stage f-top">
+        <span class="f-label">Top of Funnel</span>
+        <div class="f-content">
+          <div class="f-title">Awareness &amp; Reach — Male Segments (45-54, 35-44, 18-24)</div>
+          <div class="f-detail">CTR 32–33% → cost-efficient traffic generation. Broad-reach formats optimised for impressions and clicks, not conversion. Goal: build the pipeline.</div>
+        </div>
+      </div>
+      <div class="f-stage f-mid">
+        <span class="f-label">Mid Funnel</span>
+        <div class="f-content">
+          <div class="f-title">Consideration — Seasonal demand windows (Mar–Apr and Aug–Sep)</div>
+          <div class="f-detail">Category demand peaks in spring and early fall. Ramp up full-funnel activity 4–6 weeks ahead of each peak — not in reaction to it.</div>
+        </div>
+      </div>
+      <div class="f-stage f-bottom">
+        <span class="f-label">Bottom of Funnel</span>
+        <div class="f-content">
+          <div class="f-title">Conversion — Women 18-24 &amp; Women 25-34</div>
+          <div class="f-detail">$3,500–3,600 cumulative revenue, $1,750–1,800 average per campaign. Conversion-optimised formats, retargeting, promotional bundles. Goal: close the sale.</div>
+        </div>
+      </div>
+    </div>
+    <div class="sowhat">
+      <span>Why this works:</span> Every dollar now has a defined role tied to evidence — not demographic intuition or a single metric ranking. The funnel structure also explains what would otherwise look like a contradiction in the data.
+    </div>
+  </div>
+  <aside class="notes">
+    "The funnel framing is important because it resolves the apparent contradiction — male segments click more but buy less; female 18-34 buy more but click less. They're not competing, they're complementary. The funnel structure puts each where it already performs. And the seasonal timing layer is about amplifying that structure at the moments when category demand naturally rises."
+  </aside>
+</section>
+
+<!-- ════════════════════════════════════════════
+     SLIDE 6 — SEASONALITY
+════════════════════════════════════════════ -->
+<section class="content">
+  <div class="slide-header">
+    <div class="num">4</div>
+    <h2>Seasonality — A Pattern the Current Plan Isn't Exploiting</h2>
+    <span class="tag">Data Evidence</span>
+  </div>
+  <div class="slide-body">
+    <div class="cols cols-2" style="flex:1; gap:20px;">
+      <div>
+        <p class="lead">Two demand peaks emerge clearly — consistent with how people actually shop for interior décor.</p>
+        <table>
+          <thead><tr><th>Month</th><th>Impressions</th><th>Revenue</th><th>Signal</th></tr></thead>
+          <tbody>
+            <tr><td>Apr 21</td><td>25,000</td><td>$1,900</td><td><span class="chip chip-green">Peak 1</span></td></tr>
+            <tr><td>May 20</td><td>17,000</td><td>$1,500</td><td><span class="chip chip-amber">Trough</span></td></tr>
+            <tr><td>Sep 16</td><td><strong>26,000</strong></td><td><strong>$2,000</strong></td><td><span class="chip chip-green">Peak 2 · Best month</span></td></tr>
+            <tr><td>Oct 15</td><td>18,000</td><td>$1,500</td><td><span class="chip chip-amber">Trough</span></td></tr>
+          </tbody>
+        </table>
+        <div class="callout callout-green" style="margin-top:12px;">
+          <strong>Real-world alignment:</strong> Spring "home refresh" (Mar–Apr) and fall "styling ahead of the holidays" (Sep) are documented décor buying patterns — this isn't coincidence, it's category behaviour.
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <div class="callout">
+          <strong>The opportunity, quantified:</strong> Shifting ~20% of trough-month spend (~$60) into the 4–6 weeks before each peak — with conversion holding at observed rates — projects to roughly <strong>$100–150 in incremental revenue</strong> at no new budget commitment.
+        </div>
+        <div class="callout callout-amber">
+          <strong>What I'm not yet confident about:</strong> This is based on a single annual cycle. One year isn't enough to call this statistically seasonal vs. coincidental. Phase 1 of the roadmap (re-timing only, no new creative) is deliberately low-commitment so we can test the hypothesis before betting the full plan on it.
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    "I want to put a number on this — because 'be more seasonal' isn't actionable for a CFO. But I also want to be transparent: this is directional, based on 10 data points over one year. I've structured the recommendation so we test the cheapest version of this first — re-timing existing spend — before committing to anything larger."
+  </aside>
+</section>
+
+<!-- ════════════════════════════════════════════
+     SLIDE 7 — EXECUTION
+════════════════════════════════════════════ -->
+<section class="content">
+  <div class="slide-header">
+    <div class="num">5</div>
+    <h2>Execution — Creative &amp; Formats by Funnel Role</h2>
+    <span class="tag">Execution</span>
+  </div>
+  <div class="slide-body">
+    <div class="cols cols-2" style="flex:1; gap:20px;">
+      <div>
+        <p style="font-size:.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.8px; color:var(--muted); margin-bottom:10px;">Top of funnel — Male segments (Awareness)</p>
+        <ul class="blist" style="margin-bottom:16px;">
+          <li><strong>Format:</strong> Short-form video, "shop the look" carousels, broad-reach display</li>
+          <li><strong>Creative angle:</strong> Product styled in aspirational room settings — scroll-stopping visual impact</li>
+          <li><strong>Optimise for:</strong> Impressions and cost-per-click efficiency, not conversion rate</li>
+        </ul>
+        <p style="font-size:.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.8px; color:var(--muted); margin-bottom:10px;">Bottom of funnel — Women 18-34 (Conversion)</p>
+        <ul class="blist">
+          <li><strong>Format:</strong> Shoppable posts, retargeting sequences with bundle offers</li>
+          <li><strong>Creative angle:</strong> UGC "before and after" room makeovers — builds trust at point of decision</li>
+          <li><strong>Optimise for:</strong> Revenue per click and conversion rate, not reach</li>
+        </ul>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <div style="font-size:.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.8px; color:var(--muted); margin-bottom:4px;">Seasonal creative calendar</div>
+        <div class="phase">
+          <div class="p-num">Feb</div>
+          <div>
+            <div class="p-title">"Spring Refresh" push goes live</div>
+            <div class="p-detail">Creative in market 4–6 weeks before April demand peak — capture intent as it builds, not after it peaks</div>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="p-num">Aug</div>
+          <div>
+            <div class="p-title">"Style for the Season Ahead" push goes live</div>
+            <div class="p-detail">Pre-load before September, the campaign's single highest-revenue month ($2,000)</div>
+          </div>
+        </div>
+        <div class="callout callout-amber" style="margin-top:4px;">
+          <strong>Built-in safeguard:</strong> Creative rotation schedule from day one — concentrating spend in fewer segments without rotating creative risks fatigue and rising effective CPCs.
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    "Different funnel roles need different creative — not the same ad everywhere. The top-of-funnel creative is built to stop the scroll and earn a click efficiently. The bottom-of-funnel creative is built to close the sale. And the seasonal calendar needs to be planned backwards from the peaks — live in February for April, live in August for September."
+  </aside>
+</section>
+
+<!-- ════════════════════════════════════════════
+     SLIDE 8 — CONFIDENCE / DATA GAPS
+════════════════════════════════════════════ -->
+<section class="content">
+  <div class="slide-header">
+    <div class="num">6</div>
+    <h2>What I'm Confident About — and What I'd Test Next</h2>
+    <span class="tag">Analytical Rigour</span>
+  </div>
+  <div class="slide-body">
+    <p class="lead">Recommending action on thin evidence carries its own risk. Here's what the data supports confidently, and where I'd validate before committing further spend.</p>
+    <div class="conf-row" style="font-size:.72rem; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.5px; margin-bottom:4px;">
+      <div>Confidence</div><div>Finding</div><div>Basis / Next step</div>
+    </div>
+    <div class="conf-row">
+      <div class="conf-badge conf-high">Act now</div>
+      <div class="conf-item"><strong>Funnel-role split (top 4 segments)</strong><span>CTR vs. revenue disconnect consistent across both appearances of Women 25-34, Women 18-24, Men 35-44</span></div>
+      <div class="conf-item"><strong>Multiple data points, consistent direction</strong><span>Proceed with Phase 2 execution</span></div>
+    </div>
+    <div class="conf-row">
+      <div class="conf-badge conf-high">Act now</div>
+      <div class="conf-item"><strong>Seasonal re-timing of spend</strong><span>April and September peaks both clear, aligned with real-world décor buying behaviour</span></div>
+      <div class="conf-item"><strong>Low-risk first move — re-time existing dollars, no new commitment</strong><span>Revisit after first cycle</span></div>
+    </div>
+    <div class="conf-row">
+      <div class="conf-badge conf-low">Test first</div>
+      <div class="conf-item"><strong>Women, 35-44 underperformance</strong><span>Lowest revenue ($1,500) — but only one campaign, could be creative or timing, not the audience</span></div>
+      <div class="conf-item"><strong>Run 2-cycle controlled test with consistent creative before deciding to scale or retire</strong></div>
+    </div>
+    <div class="conf-row">
+      <div class="conf-badge conf-open">Open question</div>
+      <div class="conf-item"><strong>Year-on-year seasonality</strong><span>One annual cycle only — peaks could be coincidental, not structural</span></div>
+      <div class="conf-item"><strong>Validate in Year 2 before fully committing annual plan to seasonal structure</strong></div>
+    </div>
+  </div>
+  <aside class="notes">
+    "This slide is deliberate — I'd rather name the limits of the analysis than present false certainty. Consultants who flag where their evidence is thin are more trustworthy than those who present everything with equal confidence. The 'act now' recommendations are backed by consistent data. The 'test first' rows are where I'd want more signal before scaling. And the open question is about the honest limitation of a 10-data-point dataset."
+  </aside>
+</section>
+
+<!-- ════════════════════════════════════════════
+     SLIDE 9 — ROADMAP
+════════════════════════════════════════════ -->
+<section class="content">
+  <div class="slide-header">
+    <div class="num">7</div>
+    <h2>Roadmap — How I'd Sequence This Over 90 Days</h2>
+    <span class="tag">Implementation</span>
+  </div>
+  <div class="slide-body">
+    <p class="lead">All three moves are sequenced so each phase generates a read before the next phase commits further budget. Nothing here is irreversible.</p>
+    <div class="phases" style="flex:1;">
+      <div class="phase">
+        <div class="p-num">Phase 1</div>
+        <div style="flex:1;">
+          <div class="p-title">Re-time existing spend — no new creative required</div>
+          <div class="p-detail">Shift a portion of May/October budget earlier into February/August, ahead of the seasonal demand peaks. Lowest-risk move: same dollars, different timing. Fast to execute, fast to read.</div>
+        </div>
+        <div class="p-time">0–30 days</div>
+      </div>
+      <div class="phase">
+        <div class="p-num">Phase 2</div>
+        <div style="flex:1;">
+          <div class="p-title">Launch funnel-role split — awareness vs. conversion creative</div>
+          <div class="p-detail">Awareness creative (video/carousel) to male segments. Conversion creative (shoppable, retargeting, UGC) to Women 18-34. Review Phase 1 timing data before full commitment.</div>
+        </div>
+        <div class="p-time">30–60 days</div>
+      </div>
+      <div class="phase">
+        <div class="p-num">Phase 3</div>
+        <div style="flex:1;">
+          <div class="p-title">Close the open question — controlled retest of Women 35-44</div>
+          <div class="p-detail">Run two consistent campaigns for the segment with fresh creative. Review segment-level ROI across all active segments. Decide whether Women 35-44 earns more budget or gets retired. Adjust Phase 4 annual plan accordingly.</div>
+        </div>
+        <div class="p-time">60–90 days</div>
+      </div>
+    </div>
+    <div class="sowhat">
+      Each phase has a built-in checkpoint. If Phase 1 re-timing doesn't move the needle, we pause before investing in new creative. <span>The sequencing protects the budget while generating the evidence needed to commit to each next step.</span>
+    </div>
+  </div>
+  <aside class="notes">
+    "The sequencing is deliberate. Phase 1 costs nothing beyond re-scheduling existing spend — so it's the right thing to test first. Phase 2 adds the creative investment, but only after we have a Phase 1 read. Phase 3 closes the one open question — Women 35-44 — so we're not leaving an inconclusive data point unresolved going into the next annual plan."
+  </aside>
+</section>
+
+<!-- ════════════════════════════════════════════
+     SLIDE 10 — RISKS
+════════════════════════════════════════════ -->
+<section class="content">
+  <div class="slide-header">
+    <div class="num">8</div>
+    <h2>Risks &amp; Mitigations</h2>
+    <span class="tag">Risk Management</span>
+  </div>
+  <div class="slide-body" style="justify-content:space-between;">
+    <p class="lead">Naming risks upfront is part of the recommendation — not a caveat to it.</p>
+    <div style="flex:1; display:flex; flex-direction:column; justify-content:center; gap:14px;">
+      <div class="risk-row">
+        <div class="risk-icon">⚡</div>
+        <div class="risk-content">
+          <div class="r-title">CPC creep from concentrated spend in fewer segments</div>
+          <div class="r-mit"><strong>Mitigation:</strong> Maintain a 10–15% "exploration" budget continuously testing adjacent segments (e.g., Men 25-34, which posted strong $1,900 single-campaign revenue) — keeps us from being locked into one lane as inventory competition rises.</div>
+        </div>
+      </div>
+      <div class="risk-row">
+        <div class="risk-icon">😴</div>
+        <div class="risk-content">
+          <div class="r-title">Creative fatigue from repeated exposure to a narrower audience</div>
+          <div class="r-mit"><strong>Mitigation:</strong> Build a rotation cadence into the content calendar from day one. Flag creative refresh triggers at reach/frequency thresholds, not calendar dates.</div>
+        </div>
+      </div>
+      <div class="risk-row">
+        <div class="risk-icon">📅</div>
+        <div class="risk-content">
+          <div class="r-title">Seasonality pattern may not repeat (one annual cycle only)</div>
+          <div class="r-mit"><strong>Mitigation:</strong> Phase 1 is fully reversible — we re-time existing dollars rather than committing new ones. If the pattern doesn't repeat, we reverse the timing with no sunk creative cost.</div>
+        </div>
+      </div>
+      <div class="risk-row">
+        <div class="risk-icon">🎯</div>
+        <div class="risk-content">
+          <div class="r-title">Client's strategic priorities may differ from pure ROI optimisation</div>
+          <div class="r-mit"><strong>Mitigation:</strong> These recommendations are grounded in available data — but if a segment is strategically important for brand or pipeline reasons beyond this dataset, the retest approach (Phase 3) applies: find what works for that audience, rather than deprioritising them.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    "I'd rather name these than have them surface in month two. The CPC and fatigue risks are directly linked to the concentration strategy — so I've built in a standing exploration budget and a creative rotation schedule from the start. The seasonality risk is why Phase 1 is reversible. And the last point is for situations where the client has a strategic reason to invest in a segment the data doesn't fully support yet — the retest approach still applies."
+  </aside>
+</section>
+
+<!-- ════════════════════════════════════════════
+     SLIDE 11 — KPIs
+════════════════════════════════════════════ -->
+<section class="content">
+  <div class="slide-header">
+    <div class="num">9</div>
+    <h2>KPIs — How We'll Know if It's Working</h2>
+    <span class="tag">Measurement</span>
+  </div>
+  <div class="slide-body">
+    <p class="lead">KPIs are tied to the strategy's objectives — not generic metrics. Each one maps to a specific decision it would trigger.</p>
+    <table style="margin-top:4px;">
+      <thead>
+        <tr><th>Metric</th><th>Target / Benchmark</th><th>What a miss would trigger</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>CTR (awareness segments)</strong></td>
+          <td>Sustain ≥32% in male segments</td>
+          <td>Creative refresh or format test — not audience swap</td>
+        </tr>
+        <tr>
+          <td><strong>CPC (seasonal benchmark)</strong></td>
+          <td>Compared to same-month prior cycle, not a flat target<br><em>($0.32 in June is expected — not a red flag)</em></td>
+          <td>Investigate competitor bidding or inventory pressure; adjust bid caps</td>
+        </tr>
+        <tr>
+          <td><strong>ROI per segment</strong></td>
+          <td>Floor at 670% (lowest observed); optimise toward 850%+ average</td>
+          <td>Segment-level budget reallocation; Phase 3 retest trigger</td>
+        </tr>
+        <tr>
+          <td><strong>Revenue concentration</strong></td>
+          <td>% of total revenue from Women 18-34 — expect 40%+ as spend concentrates</td>
+          <td>If flat or declining after Phase 2, review creative effectiveness first</td>
+        </tr>
+        <tr>
+          <td><strong>Seasonal lift ratio</strong></td>
+          <td>Apr/Sep revenue ≥ 25% above trough-month average</td>
+          <td>Validates Phase 1 re-timing hypothesis; if absent, revert and analyse</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="callout" style="margin-top:14px;">
+      <strong>Principle behind the KPI design:</strong> Each metric maps to a decision, not just a score. CPC benchmarked seasonally — not as a flat target — prevents penalising high-demand periods where paying more is still profitable.
+    </div>
+  </div>
+  <aside class="notes">
+    "The KPI design matters as much as the KPIs themselves. Benchmarking CPC against the same month last year — rather than a flat number — is the difference between a useful signal and a misleading one. June's $0.32 CPC still generated a 733% ROI. If the KPI framework treats that as a failure, it would trigger the wrong response."
+  </aside>
+</section>
+
+<!-- ════════════════════════════════════════════
+     SLIDE 12 — SUMMARY
+════════════════════════════════════════════ -->
+<section class="content">
+  <div class="slide-header">
+    <div class="num">10</div>
+    <h2>Summary</h2>
+    <span class="tag">Close</span>
+  </div>
+  <div class="slide-body">
+    <div class="stat-row" style="margin-bottom:16px;">
+      <div class="stat">
+        <div class="s-val" style="font-size:1.1rem; color:var(--dark);">Re-role</div>
+        <div class="s-label">Move #1</div>
+        <div class="s-note">Assign audiences to funnel stages by what the data says they're best at — not what they look like on one metric</div>
+      </div>
+      <div class="stat">
+        <div class="s-val" style="font-size:1.1rem; color:var(--dark);">Re-time</div>
+        <div class="s-label">Move #2</div>
+        <div class="s-note">Front-load spend into Feb &amp; Aug to arrive in market ahead of April and September demand peaks</div>
+      </div>
+      <div class="stat">
+        <div class="s-val" style="font-size:1.1rem; color:var(--dark);">Re-test</div>
+        <div class="s-label">Move #3</div>
+        <div class="s-note">Run a proper two-cycle test on Women 35-44 before scaling or retiring — one data point isn't a verdict</div>
+      </div>
+    </div>
+    <ul class="blist" style="margin-bottom:14px;">
+      <li>All three moves are <strong>sequenced over 90 days</strong>, each phase reversible and checkpointed before the next commits budget</li>
+      <li>No new budget required — this is the same dollars, <strong>pointed with more precision</strong></li>
+      <li>The existing 813% average ROI already signals this is an <strong>under-invested channel</strong> relative to its return — once the re-targeting is validated, there is a strong case for scaling total spend</li>
+    </ul>
+    <div class="sowhat">
+      This isn't a turnaround story — it's an optimisation story. The campaign already works. <span>The opportunity is to make it work as hard as the data already tells us it can.</span>
+    </div>
+  </div>
+  <aside class="notes">
+    "To close: three moves, 90-day sequence, no new budget needed. The campaign is already returning eight dollars per dollar spent — that's not a problem campaign, it's an under-resourced one. Once we validate the re-timing and funnel-split are working, there's a strong case to bring to leadership for scaling the total budget. That's the longer-term story behind these near-term optimisation moves."
+  </aside>
+</section>
+
+<!-- ════════════════════════════════════════════
+     SLIDE 13 — APPENDIX / Q&A PREP
+════════════════════════════════════════════ -->
+<section class="content">
+  <div class="slide-header">
+    <div class="num">A</div>
+    <h2>Appendix — Anticipated Questions</h2>
+    <span class="tag">Q&amp;A Prep</span>
+  </div>
+  <div class="slide-body">
+    <p class="lead" style="margin-bottom:14px;">Have this slide ready but don't present it unprompted. Use only if challenged.</p>
+    <div class="qa-item">
+      <div class="qa-q">"What if Women 35-44 is a strategic priority for the client regardless of the data?"</div>
+      <div class="qa-a">Then the retest becomes even more important — we want to find the creative or targeting angle that <em>works</em> for them, not deprioritise a segment the client has committed to. The data tells us something isn't landing yet, not that the audience is wrong.</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q">"How would you validate seasonality isn't a coincidence with only one year of data?"</div>
+      <div class="qa-a">I'd want at least one more annual cycle before betting the full plan on it — which is exactly why Phase 1 only re-times existing spend rather than committing new creative budget to a seasonal assumption we can't yet verify.</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q">"What if the client just wants more reach — not this funnel segmentation?"</div>
+      <div class="qa-a">I'd ask what "success" means to them beyond reach — because the data shows reach and revenue come from different audiences here. I'd rather align on the business objective first than optimise the wrong metric well. Reach that doesn't convert is a cost, not a result.</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q">"You mentioned $100-150 incremental revenue — how did you get to that number?"</div>
+      <div class="qa-a">Directional estimate: ~20% of trough-month spend is ~$60. At observed conversion rates in the April/September campaigns (highest ~$1,900–2,000 revenue at ~$230-238 cost), that additional $60 at similar efficiency would generate roughly $100-150 in revenue. It's an assumption-based estimate, not a forecast — I'd revisit after one cycle of actual data.</div>
+    </div>
+  </div>
+  <aside class="notes">
+    Only bring up this slide if challenged on one of these points. Having a prepared answer to your own weakest points signals intellectual honesty and confidence — two things consulting interviewers value highly.
+  </aside>
+</section>
+
+</div><!-- /.slides -->
+</div><!-- /.reveal -->
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+Reveal.initialize({
+  hash: true,
+  slideNumber: true,
+  controls: true,
+  progress: true,
+  center: false,
+  transition: 'fade',
+  transitionSpeed: 'fast',
+  width: 1280,
+  height: 720,
+  margin: 0,
+  minScale: 0.2,
+  maxScale: 2.0,
+  plugins: []
+});
+</script>
+
+<!-- Keyboard hint -->
+<div style="position:fixed; bottom:14px; left:50%; transform:translateX(-50%); background:rgba(0,0,0,.55); color:#ddd; font-family:'Segoe UI',sans-serif; font-size:12px; padding:6px 16px; border-radius:999px; pointer-events:none; z-index:9999;">
+  ← → navigate &nbsp;·&nbsp; S = presenter view with speaker notes &nbsp;·&nbsp; F = fullscreen &nbsp;·&nbsp; Ctrl+P = export PDF
+</div>
+</body>
+</html>
