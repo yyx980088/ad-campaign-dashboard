@@ -452,11 +452,16 @@ function valueLabelPlugin(id, color, formatter) {
       const meta = chart.getDatasetMeta(0);
       const values = chart.data.datasets[0].data;
       ctx.save();
-      ctx.font = "700 11px 'Segoe UI', -apple-system, Roboto, Arial, sans-serif";
-      ctx.fillStyle = color;
       ctx.textAlign = 'center';
       meta.data.forEach((point, index) => {
-        ctx.fillText(formatter(values[index]), point.x, point.y - 12);
+        const segment = currentDemographic[index] || '';
+        ctx.font = "600 10px 'Segoe UI', -apple-system, Roboto, Arial, sans-serif";
+        ctx.fillStyle = '#6b6470';
+        ctx.fillText(segment, point.x, point.y - 26);
+
+        ctx.font = "700 11px 'Segoe UI', -apple-system, Roboto, Arial, sans-serif";
+        ctx.fillStyle = color;
+        ctx.fillText(formatter(values[index]), point.x, point.y - 13);
       });
       ctx.restore();
     }
@@ -579,7 +584,7 @@ const chart2 = new Chart(document.getElementById('chart2'), {
   },
   options: {
     responsive: true,
-    layout: { padding: { top: 24 } },
+    layout: { padding: { top: 42 } },
     plugins: { legend: { position: 'top', align: 'end' } },
     scales: {
       x: { grid: { display: false }, title: { display: true, text: 'Campaign Date' } },
@@ -605,7 +610,7 @@ const chart5 = new Chart(document.getElementById('chart5'), {
   },
   options: {
     responsive: true,
-    layout: { padding: { top: 24 } },
+    layout: { padding: { top: 42 } },
     plugins: { legend: { position: 'top', align: 'end' } },
     scales: {
       x: { grid: { display: false }, title: { display: true, text: 'Campaign Date' } },
