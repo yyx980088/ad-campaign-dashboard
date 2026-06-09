@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ad Campaign Performance Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #f3f0f7;
+    --card-bg: #ffffff;
+    --border: #e6deef;
+    --text: #1a1a1a;
+    --muted: #6b6470;
+    --accent: #a100ff;
+    --accent-dark: #5c00b3;
+    --shadow: 0 4px 16px rgba(20, 0, 40, 0.07);
+    --shadow-hover: 0 10px 28px rgba(161, 0, 255, 0.16);
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', -apple-system, Roboto, Arial, sans-serif;
+    background: linear-gradient(180deg, #1a1a1a 0%, #1a1a1a 220px, #f3f0f7 220px, #f3f0f7 100%);
+    margin: 0;
+    padding: 28px 24px 48px;
+    color: var(--text);
+  }
+  .header {
+    max-width: 1320px;
+    margin: 0 auto 28px;
+    padding: 22px 0 30px;
+    text-align: center;
+  }
+  .header .eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #d9b3ff;
+    background: rgba(161, 0, 255, 0.18);
+    border: 1px solid rgba(161, 0, 255, 0.35);
+    padding: 5px 14px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+  h1 {
+    margin: 0 0 6px;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    color: #ffffff;
+  }
+  .subtitle {
+    color: #b9b3c0;
+    margin: 0;
+    font-size: 15px;
+  }
+  .filter-bar {
+    max-width: 1320px;
+    margin: 0 auto 22px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px 22px;
+    box-shadow: var(--shadow);
+  }
+  .filter-bar .filter-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .filter-bar .filter-title .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: inline-block;
+  }
+  .filter-bar label {
+    font-size: 13px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .filter-bar select {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 7px 12px;
+    font-size: 13px;
+    font-family: inherit;
+    color: var(--text);
+    background: #faf8fc;
+    cursor: pointer;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .filter-bar select:hover, .filter-bar select:focus {
+    border-color: var(--accent);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(161,0,255,0.12);
+  }
+  .filter-bar .reset-btn {
+    margin-left: auto;
+    border: 1px solid var(--accent);
+    background: transparent;
+    color: var(--accent-dark);
+    font-weight: 600;
+    font-size: 13px;
+    padding: 8px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+  }
+  .filter-bar .reset-btn:hover {
+    background: var(--accent);
+    color: #fff;
+    transform: translateY(-1px);
+  }
+  .filter-bar .range-note {
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+  }
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+    max-width: 1320px;
+    margin: 0 auto 28px;
+  }
+  .kpi {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 18px;
+    box-shadow: var(--shadow);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .kpi:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+  .kpi .kpi-label {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 6px;
+  }
+  .kpi .kpi-value {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    transition: opacity 0.15s ease;
+  }
+  .kpi .kpi-bar {
+    margin-top: 10px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--border);
+    overflow: hidden;
+  }
+  .kpi .kpi-bar span {
+    display: block;
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    padding: 20px 22px 16px;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+  }
+  .card-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .card-head .badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .card h2 {
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0;
+    color: #ffffff;
+    background: #1a1a1a;
+    padding: 6px 12px;
+    border-radius: 6px;
+    line-height: 1.4;
+  }
+  .card-sub {
+    font-size: 12.5px;
+    color: var(--muted);
+    margin: 6px 0 0;
+    line-height: 1.45;
+  }
+  canvas {
+    max-height: 340px;
+  }
+  .glossary {
+    max-width: 1320px;
+    margin: 24px auto 0;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    padding: 26px 28px;
+  }
+  .glossary h3 {
+    margin: 0 0 4px;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .glossary .glossary-sub {
+    margin: 0 0 18px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .glossary dl {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px 36px;
+    margin: 0;
+  }
+  .glossary .term {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .glossary dt {
+    font-weight: 700;
+    color: var(--accent-dark);
+    font-size: 13.5px;
+    white-space: nowrap;
+  }
+  .glossary dd {
+    margin: 0;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  footer {
+    max-width: 1320px;
+    margin: 32px auto 0;
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+  }
+  @media (max-width: 1100px) {
+    .kpi-row { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 900px) {
+    .grid { grid-template-columns: 1fr; }
+    .glossary dl { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .kpi-row { grid-template-columns: repeat(2, 1fr); }
+    .filter-bar .reset-btn { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <span class="eyebrow">Marketing Analytics</span>
+  <h1>Ad Campaign Performance Dashboard</h1>
+  <p class="subtitle">Jan 24 – Oct 15 &middot; 10 campaigns</p>
+</div>
+
+<div class="filter-bar">
+  <span class="filter-title"><span class="dot"></span>Date range filter</span>
+  <label>From <select id="fromSelect"></select></label>
+  <label>To <select id="toSelect"></select></label>
+  <span class="range-note" id="rangeNote"></span>
+  <button class="reset-btn" id="resetBtn" type="button">Reset range</button>
+</div>
+
+<div class="kpi-row" id="kpiRow"></div>
+
+<div class="grid">
+
+  <div class="card">
+    <div class="card-head">
+      <span class="badge">1</span>
+      <div>
+        <h2>Impressions &amp; Ad Clicks by Campaign Date</h2>
+        <p class="card-sub">How many times ads were shown (impressions) versus how often people actually clicked them, tracked side by side over time.</p>
+      </div>
+    </div>
+    <canvas id="chart1"></canvas>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <span class="badge">2</span>
+      <div>
+        <h2>CTR (%) by Campaign Date</h2>
+        <p class="card-sub">Click-through rate — the share of impressions that converted into a click. A quick read on creative and audience-targeting effectiveness.</p>
+      </div>
+    </div>
+    <canvas id="chart2"></canvas>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <span class="badge">3</span>
+      <div>
+        <h2>CPC ($) by Campaign Date</h2>
+        <p class="card-sub">Average cost paid per ad click. Lower values mean more efficient spend; spikes can flag rising competition or weaker targeting.</p>
+      </div>
+    </div>
+    <canvas id="chart5"></canvas>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <span class="badge">4</span>
+      <div>
+        <h2>Total Cost &amp; Generated Revenue by Campaign Date</h2>
+        <p class="card-sub">Ad spend versus the revenue it generated for each campaign run, plotted on dual axes to make the gap between cost and return easy to spot.</p>
+      </div>
+    </div>
+    <canvas id="chart3"></canvas>
+  </div>
+
+  <div class="card" style="grid-column: 1 / -1;">
+    <div class="card-head">
+      <span class="badge">5</span>
+      <div>
+        <h2>ROI (%) by Campaign Date (with Demographic Segment)</h2>
+        <p class="card-sub">Return on investment for each campaign, annotated with the leading demographic segment it reached — useful for spotting which audiences drive the strongest payback. Hover a point for details.</p>
+      </div>
+    </div>
+    <canvas id="chart4"></canvas>
+  </div>
+
+</div>
+
+<div class="glossary">
+  <h3>Metric definitions</h3>
+  <p class="glossary-sub">What each figure on this dashboard means and how it's calculated.</p>
+  <dl>
+    <div class="term"><dt>Impressions</dt><dd>The total number of times an ad was displayed to users, regardless of whether it was clicked.</dd></div>
+    <div class="term"><dt>Ad Clicks</dt><dd>The number of times users clicked on an ad after it was shown to them.</dd></div>
+    <div class="term"><dt>CTR (Click-Through Rate)</dt><dd>Ad Clicks ÷ Impressions × 100. Measures how compelling an ad is at converting views into clicks.</dd></div>
+    <div class="term"><dt>CPC (Cost Per Click)</dt><dd>Total Cost ÷ Ad Clicks. The average amount spent each time a user clicks on an ad.</dd></div>
+    <div class="term"><dt>Total Cost</dt><dd>The full amount spent running a campaign over the given period, including media and platform fees.</dd></div>
+    <div class="term"><dt>Generated Revenue</dt><dd>The total revenue attributed to a campaign — sales or conversions traced back to ad clicks.</dd></div>
+    <div class="term"><dt>ROI (Return on Investment)</dt><dd>(Revenue − Total Cost) ÷ Total Cost × 100. The percentage return earned on every dollar of ad spend.</dd></div>
+    <div class="term"><dt>Demographic Segment</dt><dd>The audience group (gender and age band) that most engaged with a given campaign run.</dd></div>
+  </dl>
+</div>
+
+<footer>Data refreshed Oct 15 &middot; Figures are illustrative &middot; Use the date range filter above to drill into any period</footer>
+
+<script>
+const dates = ["Jan 24","Feb 23","Mar 22","Apr 21","May 20","Jun 19","Jul 18","Aug 17","Sep 16","Oct 15"];
+const impressions = [15000,18000,22000,25000,17000,20000,23000,21000,26000,18000];
+const adClicks    = [500,600,700,800,550,600,750,650,850,550];
+const cpc         = [0.25,0.28,0.30,0.29,0.26,0.32,0.31,0.30,0.28,0.29];
+const ctr         = [30.0,30.0,31.4,31.3,30.9,33.3,30.7,32.3,30.6,32.7];
+const totalCost   = [125,168,210,232,143,192,233,195,238,160];
+const revenue     = [1500,1600,1800,1900,1500,1600,1800,1700,2000,1500];
+const demographic = ["Women, 25-34","Men, 35-44","Women, 18-24","Men, 25-34","Women, 35-44",
+                     "Men, 45-54","Women, 18-24","Men, 18-24","Women, 25-34","Men, 35-44"];
+
+// ROI % = (Revenue - Total Cost) / Total Cost * 100
+const roi = totalCost.map((c, i) => Number((((revenue[i] - c) / c) * 100).toFixed(1)));
+
+const colors = {
+  impressions: '#a100ff',
+  adClicks: '#1a1a1a',
+  cpc: '#7500c0',
+  ctr: '#c896ff',
+  totalCost: '#1a1a1a',
+  revenue: '#a100ff',
+  roi: '#5c00b3'
+};
+
+// ---- Global Chart.js styling ----
+Chart.defaults.font.family = "'Segoe UI', -apple-system, Roboto, Arial, sans-serif";
+Chart.defaults.color = '#6b6470';
+Chart.defaults.borderColor = '#ece4f5';
+Chart.defaults.plugins.legend.labels.usePointStyle = true;
+Chart.defaults.plugins.legend.labels.boxWidth = 8;
+Chart.defaults.plugins.tooltip.backgroundColor = '#1a1a1a';
+Chart.defaults.plugins.tooltip.titleColor = '#d9b3ff';
+Chart.defaults.plugins.tooltip.padding = 10;
+Chart.defaults.plugins.tooltip.cornerRadius = 8;
+Chart.defaults.plugins.tooltip.titleFont = { weight: '600' };
+Chart.defaults.elements.point.radius = 3;
+Chart.defaults.elements.point.hoverRadius = 6;
+Chart.defaults.elements.line.borderWidth = 2.5;
+Chart.defaults.animation.duration = 450;
+Chart.defaults.animation.easing = 'easeOutQuart';
+
+function withAlpha(hex, alpha) {
+  const v = hex.replace('#', '');
+  const r = parseInt(v.substring(0, 2), 16);
+  const g = parseInt(v.substring(2, 4), 16);
+  const b = parseInt(v.substring(4, 6), 16);
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
+function gradientFill(ctx, chartArea, hex, alphaTop = 0.28, alphaBottom = 0.02) {
+  const g = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
+  g.addColorStop(0, withAlpha(hex, alphaTop));
+  g.addColorStop(1, withAlpha(hex, alphaBottom));
+  return g;
+}
+
+// Builds a plugin that permanently labels each point on a single-dataset line chart.
+function valueLabelPlugin(id, color, formatter) {
+  return {
+    id,
+    afterDatasetsDraw(chart) {
+      const { ctx } = chart;
+      const meta = chart.getDatasetMeta(0);
+      const values = chart.data.datasets[0].data;
+      ctx.save();
+      ctx.font = "700 11px 'Segoe UI', -apple-system, Roboto, Arial, sans-serif";
+      ctx.fillStyle = color;
+      ctx.textAlign = 'center';
+      meta.data.forEach((point, index) => {
+        ctx.fillText(formatter(values[index]), point.x, point.y - 12);
+      });
+      ctx.restore();
+    }
+  };
+}
+
+// Draws a dashed guide line from a hovered point down to the x-axis.
+Chart.register({
+  id: 'hoverLine',
+  afterDraw(chart) {
+    const active = chart.getActiveElements();
+    if (!active || !active.length) return;
+    const { ctx, chartArea } = chart;
+    const seen = new Set();
+    ctx.save();
+    ctx.setLineDash([4, 4]);
+    ctx.lineWidth = 1.5;
+    ctx.strokeStyle = 'rgba(161, 0, 255, 0.55)';
+    active.forEach(el => {
+      const { x, y } = el.element;
+      if (seen.has(x)) return;
+      seen.add(x);
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      ctx.lineTo(x, chartArea.bottom);
+      ctx.stroke();
+    });
+    ctx.restore();
+  }
+});
+
+const sum = arr => arr.reduce((a, b) => a + b, 0);
+const avg = arr => sum(arr) / arr.length;
+const fmtInt = n => Math.round(n).toLocaleString();
+const fmtMoney = n => '$' + Math.round(n).toLocaleString();
+
+// ---- KPI summary row (re-rendered whenever the date range changes) ----
+const kpiRow = document.getElementById('kpiRow');
+
+function renderKpis(imprArr, clicksArr, ctrArr, cpcArr, costArr, revArr, roiArr) {
+  const kpis = [
+    { label: 'Total Impressions', value: fmtInt(sum(imprArr)), color: colors.impressions, pct: 100 },
+    { label: 'Total Ad Clicks',   value: fmtInt(sum(clicksArr)), color: colors.adClicks,   pct: 70 },
+    { label: 'Avg. CTR',          value: avg(ctrArr).toFixed(1) + '%', color: colors.ctr,  pct: (avg(ctrArr) / 35) * 100 },
+    { label: 'Avg. CPC',          value: '$' + avg(cpcArr).toFixed(2), color: colors.cpc,  pct: (avg(cpcArr) / 0.4) * 100 },
+    { label: 'Spend / Revenue',   value: fmtMoney(sum(costArr)) + ' / ' + fmtMoney(sum(revArr)), color: colors.revenue, pct: (sum(costArr) / sum(revArr)) * 100 },
+    { label: 'Avg. ROI',          value: avg(roiArr).toFixed(0) + '%', color: colors.roi,  pct: Math.min((avg(roiArr) / 1200) * 100, 100) }
+  ];
+  kpiRow.innerHTML = kpis.map(k => `
+    <div class="kpi">
+      <div class="kpi-label">${k.label}</div>
+      <div class="kpi-value">${k.value}</div>
+      <div class="kpi-bar"><span style="width:${Math.max(k.pct, 4)}%; background:${k.color};"></span></div>
+    </div>
+  `).join('');
+}
+
+// Demographic labels currently in view — read by the ROI chart's tooltip and label plugin.
+let currentDemographic = demographic.slice();
+
+// ---- Chart 1: Impressions + Ad Clicks (2 y-axes) ----
+const chart1 = new Chart(document.getElementById('chart1'), {
+  type: 'line',
+  data: {
+    labels: dates,
+    datasets: [
+      {
+        label: 'Impressions',
+        data: impressions,
+        borderColor: colors.impressions,
+        backgroundColor: (c) => c.chart.chartArea ? gradientFill(c.chart.ctx, c.chart.chartArea, colors.impressions) : withAlpha(colors.impressions, 0.15),
+        yAxisID: 'yImpressions',
+        fill: true,
+        tension: 0.35
+      },
+      {
+        label: 'Ad Clicks',
+        data: adClicks,
+        borderColor: colors.adClicks,
+        backgroundColor: withAlpha(colors.adClicks, 0.15),
+        yAxisID: 'yClicks',
+        fill: false,
+        tension: 0.35
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    interaction: { mode: 'index', intersect: false },
+    plugins: { legend: { position: 'top', align: 'end' } },
+    scales: {
+      x: { grid: { display: false }, title: { display: true, text: 'Campaign Date' } },
+      yImpressions: {
+        type: 'linear', position: 'left',
+        title: { display: true, text: 'Impressions' },
+        grid: { drawOnChartArea: true }
+      },
+      yClicks: {
+        type: 'linear', position: 'right',
+        title: { display: true, text: 'Ad Clicks' },
+        grid: { drawOnChartArea: false }
+      }
+    }
+  }
+});
+
+// ---- Chart 2: CTR % ----
+const chart2 = new Chart(document.getElementById('chart2'), {
+  type: 'line',
+  data: {
+    labels: dates,
+    datasets: [{
+      label: 'CTR (%)',
+      data: ctr,
+      borderColor: colors.ctr,
+      backgroundColor: (c) => c.chart.chartArea ? gradientFill(c.chart.ctx, c.chart.chartArea, colors.ctr) : withAlpha(colors.ctr, 0.15),
+      tension: 0.35,
+      fill: true
+    }]
+  },
+  options: {
+    responsive: true,
+    layout: { padding: { top: 24 } },
+    plugins: { legend: { position: 'top', align: 'end' } },
+    scales: {
+      x: { grid: { display: false }, title: { display: true, text: 'Campaign Date' } },
+      y: { title: { display: true, text: 'CTR (%)' }, suggestedMin: 28, suggestedMax: 34 }
+    }
+  },
+  plugins: [valueLabelPlugin('ctrValueLabels', colors.roi, v => v.toFixed(1) + '%')]
+});
+
+// ---- Chart 5: CPC ----
+const chart5 = new Chart(document.getElementById('chart5'), {
+  type: 'line',
+  data: {
+    labels: dates,
+    datasets: [{
+      label: 'CPC ($)',
+      data: cpc,
+      borderColor: colors.cpc,
+      backgroundColor: (c) => c.chart.chartArea ? gradientFill(c.chart.ctx, c.chart.chartArea, colors.cpc) : withAlpha(colors.cpc, 0.15),
+      tension: 0.35,
+      fill: true
+    }]
+  },
+  options: {
+    responsive: true,
+    layout: { padding: { top: 24 } },
+    plugins: { legend: { position: 'top', align: 'end' } },
+    scales: {
+      x: { grid: { display: false }, title: { display: true, text: 'Campaign Date' } },
+      y: { title: { display: true, text: 'CPC ($)' } }
+    }
+  },
+  plugins: [valueLabelPlugin('cpcValueLabels', colors.cpc, v => '$' + v.toFixed(2))]
+});
+
+// ---- Chart 3: Total Cost + Generated Revenue ----
+const chart3 = new Chart(document.getElementById('chart3'), {
+  type: 'line',
+  data: {
+    labels: dates,
+    datasets: [
+      {
+        label: 'Total Cost ($)',
+        data: totalCost,
+        borderColor: colors.totalCost,
+        backgroundColor: withAlpha(colors.totalCost, 0.12),
+        yAxisID: 'yCost',
+        fill: false,
+        tension: 0.35
+      },
+      {
+        label: 'Generated Revenue ($)',
+        data: revenue,
+        borderColor: colors.revenue,
+        backgroundColor: (c) => c.chart.chartArea ? gradientFill(c.chart.ctx, c.chart.chartArea, colors.revenue) : withAlpha(colors.revenue, 0.15),
+        yAxisID: 'yRevenue',
+        fill: true,
+        tension: 0.35
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    interaction: { mode: 'index', intersect: false },
+    plugins: { legend: { position: 'top', align: 'end' } },
+    scales: {
+      x: { grid: { display: false }, title: { display: true, text: 'Campaign Date' } },
+      yCost: {
+        type: 'linear', position: 'left',
+        title: { display: true, text: 'Total Cost ($)' },
+        grid: { drawOnChartArea: false }
+      },
+      yRevenue: {
+        type: 'linear', position: 'right',
+        title: { display: true, text: 'Generated Revenue ($)' },
+        grid: { drawOnChartArea: true }
+      }
+    }
+  }
+});
+
+// ---- Chart 4: ROI % with demographic segment labels ----
+const chart4 = new Chart(document.getElementById('chart4'), {
+  type: 'line',
+  data: {
+    labels: dates,
+    datasets: [{
+      label: 'ROI (%)',
+      data: roi,
+      borderColor: colors.roi,
+      backgroundColor: (c) => c.chart.chartArea ? gradientFill(c.chart.ctx, c.chart.chartArea, colors.roi, 0.22, 0.01) : withAlpha(colors.roi, 0.15),
+      tension: 0.35,
+      fill: true,
+      pointRadius: 5,
+      pointHoverRadius: 7,
+      pointBackgroundColor: colors.roi,
+      pointBorderColor: '#fff',
+      pointBorderWidth: 2
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'top', align: 'end' },
+      tooltip: {
+        callbacks: {
+          afterLabel: function(context) {
+            return 'Segment: ' + currentDemographic[context.dataIndex];
+          }
+        }
+      }
+    },
+    layout: { padding: { top: 36 } },
+    scales: {
+      x: { grid: { display: false }, title: { display: true, text: 'Campaign Date' } },
+      y: { title: { display: true, text: 'ROI (%)' } }
+    }
+  },
+  plugins: [{
+    id: 'roiSegmentLabels',
+    afterDatasetsDraw(chart) {
+      const { ctx } = chart;
+      const meta = chart.getDatasetMeta(0);
+      const values = chart.data.datasets[0].data;
+      ctx.save();
+      ctx.textAlign = 'center';
+      meta.data.forEach((point, index) => {
+        ctx.font = "600 11px 'Segoe UI', -apple-system, Roboto, Arial, sans-serif";
+        ctx.fillStyle = '#6b6470';
+        ctx.fillText(currentDemographic[index] || '', point.x, point.y - 26);
+
+        ctx.font = "700 12px 'Segoe UI', -apple-system, Roboto, Arial, sans-serif";
+        ctx.fillStyle = colors.roi;
+        ctx.fillText(values[index] + '%', point.x, point.y - 12);
+      });
+      ctx.restore();
+    }
+  }]
+});
+
+// ---- Interactive date-range filter: drives every chart and the KPI row ----
+const fromSelect = document.getElementById('fromSelect');
+const toSelect   = document.getElementById('toSelect');
+const resetBtn   = document.getElementById('resetBtn');
+const rangeNote  = document.getElementById('rangeNote');
+
+dates.forEach((d, i) => {
+  fromSelect.add(new Option(d, i));
+  toSelect.add(new Option(d, i));
+});
+fromSelect.value = 0;
+toSelect.value = dates.length - 1;
+
+function renderRange(startIdx, endIdx) {
+  const idx = [];
+  for (let i = startIdx; i <= endIdx; i++) idx.push(i);
+
+  const dDates  = idx.map(i => dates[i]);
+  const dImpr   = idx.map(i => impressions[i]);
+  const dClicks = idx.map(i => adClicks[i]);
+  const dCpc    = idx.map(i => cpc[i]);
+  const dCtr    = idx.map(i => ctr[i]);
+  const dCost   = idx.map(i => totalCost[i]);
+  const dRev    = idx.map(i => revenue[i]);
+  const dRoi    = idx.map(i => roi[i]);
+  currentDemographic = idx.map(i => demographic[i]);
+
+  chart1.data.labels = dDates;
+  chart1.data.datasets[0].data = dImpr;
+  chart1.data.datasets[1].data = dClicks;
+  chart1.update();
+
+  chart2.data.labels = dDates;
+  chart2.data.datasets[0].data = dCtr;
+  chart2.update();
+
+  chart5.data.labels = dDates;
+  chart5.data.datasets[0].data = dCpc;
+  chart5.update();
+
+  chart3.data.labels = dDates;
+  chart3.data.datasets[0].data = dCost;
+  chart3.data.datasets[1].data = dRev;
+  chart3.update();
+
+  chart4.data.labels = dDates;
+  chart4.data.datasets[0].data = dRoi;
+  chart4.update();
+
+  renderKpis(dImpr, dClicks, dCtr, dCpc, dCost, dRev, dRoi);
+
+  rangeNote.textContent = idx.length === dates.length
+    ? `Showing all ${dates.length} campaigns`
+    : `Showing ${idx.length} of ${dates.length} campaigns (${dDates[0]} – ${dDates[dDates.length - 1]})`;
+}
+
+function handleRangeChange() {
+  let start = Number(fromSelect.value);
+  let end = Number(toSelect.value);
+  if (start > end) {
+    [start, end] = [end, start];
+    fromSelect.value = start;
+    toSelect.value = end;
+  }
+  renderRange(start, end);
+}
+
+fromSelect.addEventListener('change', handleRangeChange);
+toSelect.addEventListener('change', handleRangeChange);
+resetBtn.addEventListener('click', () => {
+  fromSelect.value = 0;
+  toSelect.value = dates.length - 1;
+  renderRange(0, dates.length - 1);
+});
+
+renderRange(0, dates.length - 1);
+</script>
+
+</body>
+</html>
