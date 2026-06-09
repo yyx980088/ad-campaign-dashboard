@@ -560,77 +560,68 @@ tr:nth-child(even) td { background: rgba(161,0,255,.04); }
 </section>
 
 <!-- ════════════════════════════════════════════
-     SLIDE 4 — THE CORE FINDING
+     SLIDE 4 — CORE FINDING + STRATEGY (COMBINED)
 ════════════════════════════════════════════ -->
 <section class="content">
   <div class="slide-header">
     <div class="num">2</div>
-    <h2>The Core Finding — Engagement and Revenue point in opposite directions</h2>
-    <span class="tag">Key Insight</span>
+    <h2>From Insight to Strategy — The Full-Funnel Approach</h2>
+    <span class="tag">Insight · Recommendation</span>
   </div>
   <div class="slide-body">
     <div class="cols cols-2" style="flex:1; gap:20px;">
-      <div>
-        <p style="font-size:.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.8px; color:var(--muted); margin-bottom:8px;">Ranked by CTR — who clicks the most</p>
+
+      <!-- LEFT — Core Finding -->
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <div style="font-size:.67rem; font-weight:700; text-transform:uppercase; letter-spacing:1.2px; color:var(--muted); margin-bottom:2px;">The Core Finding</div>
         <table>
-          <thead><tr><th>Segment</th><th>CTR</th><th>Revenue</th></tr></thead>
+          <thead>
+            <tr><th>Segment</th><th>CTR</th><th>Cumulative Revenue</th></tr>
+          </thead>
           <tbody>
-            <tr><td>Men, 45-54</td><td><strong>33.3%</strong> <span class="chip chip-green">↑ High</span></td><td>$1,600</td></tr>
-            <tr><td>Men, 35-44</td><td>32.7% <span class="chip chip-green">↑ High</span></td><td>$1,500</td></tr>
-            <tr><td>Men, 18-24</td><td>32.3% <span class="chip chip-green">↑ High</span></td><td>$1,700</td></tr>
-            <tr><td>Women, 18-24</td><td>31.0% avg</td><td><strong>$3,600</strong> <span class="chip chip-purple">↑ Top</span></td></tr>
-            <tr><td>Women, 25-34</td><td>30.3% avg</td><td><strong>$3,500</strong> <span class="chip chip-purple">↑ Top</span></td></tr>
+            <tr><td>Men, 45-54</td><td><strong>33.3%</strong> <span class="chip chip-green">High</span></td><td>$1,600</td></tr>
+            <tr><td>Men, 35-44</td><td>32.7% <span class="chip chip-green">High</span></td><td>$1,500</td></tr>
+            <tr><td>Men, 18-24</td><td>32.3% <span class="chip chip-green">High</span></td><td>$1,700</td></tr>
+            <tr><td>Women, 18-24</td><td>31.0% avg</td><td><strong>$3,600</strong> <span class="chip chip-purple">Top</span></td></tr>
+            <tr><td>Women, 25-34</td><td>30.3% avg</td><td><strong>$3,500</strong> <span class="chip chip-purple">Top</span></td></tr>
           </tbody>
         </table>
-      </div>
-      <div style="display:flex; flex-direction:column; gap:10px;">
-        <div class="callout">
-          <strong>The insight:</strong> Optimising purely for CTR (male segments at 32-33%) would direct budget away from the audiences generating the most cumulative revenue (Women 18-34 at $3,500-3,600). One metric alone actively misleads the strategy.
-        </div>
-        <div class="callout callout-green">
-          <strong>What this unlocks:</strong> These two groups aren't competing — they serve different funnel roles. Male segments are efficient at generating reach and clicks. Female 18-34 segments are efficient at converting that engagement into revenue. The strategy should use both, for different jobs.
+        <div class="callout callout-green" style="margin-top:2px;">
+          <strong>The insight:</strong> High CTR ≠ high revenue. These audiences aren't competing — they play <em>different roles</em>. Male segments drive efficient reach; Women 18-34 drive conversion. The strategy uses both, for different jobs.
         </div>
       </div>
-    </div>
-  </div>
-</section>
 
-<!-- ════════════════════════════════════════════
-     SLIDE 5 — STRATEGY
-════════════════════════════════════════════ -->
-<section class="content">
-  <div class="slide-header">
-    <div class="num">3</div>
-    <h2>Strategy — A Full-Funnel Approach Built on That Insight</h2>
-    <span class="tag">Recommendation</span>
-  </div>
-  <div class="slide-body">
-    <p class="lead">Rather than one generic campaign to everyone, restructure spend so each audience is doing the job it's statistically best suited for.</p>
-    <div class="funnel" style="flex:1;">
-      <div class="f-stage f-top">
-        <span class="f-label">Top of Funnel</span>
-        <div class="f-content">
-          <div class="f-title">Awareness &amp; Reach — Male Segments (45-54, 35-44, 18-24)</div>
-          <div class="f-detail">CTR 32–33% → cost-efficient traffic generation. Broad-reach formats optimised for impressions and clicks, not conversion. Goal: build the pipeline.</div>
+      <!-- RIGHT — Strategy -->
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <div style="font-size:.67rem; font-weight:700; text-transform:uppercase; letter-spacing:1.2px; color:var(--muted); margin-bottom:2px;">The Full-Funnel Strategy</div>
+        <div class="funnel" style="gap:8px;">
+          <div class="f-stage f-top">
+            <span class="f-label">Top of Funnel</span>
+            <div class="f-content">
+              <div class="f-title">Awareness — Male Segments (45-54, 35-44, 18-24)</div>
+              <div class="f-detail">CTR 32–33% → cost-efficient reach. Broad-reach formats built for impressions and clicks, not conversion.</div>
+            </div>
+          </div>
+          <div class="f-stage f-mid">
+            <span class="f-label">Mid Funnel</span>
+            <div class="f-content">
+              <div class="f-title">Consideration — Festive demand windows</div>
+              <div class="f-detail">Ramp up 4–6 weeks ahead of Hari Raya (Mar–Apr) and Deepavali/year-end (Aug–Sep) peaks — not in reaction to them.</div>
+            </div>
+          </div>
+          <div class="f-stage f-bottom">
+            <span class="f-label">Bottom of Funnel</span>
+            <div class="f-content">
+              <div class="f-title">Conversion — Women 18-24 &amp; Women 25-34</div>
+              <div class="f-detail">Highest cumulative revenue. Retargeting, shoppable posts, festive UGC — optimised to close the sale.</div>
+            </div>
+          </div>
+        </div>
+        <div class="sowhat" style="font-size:.78rem; padding:12px 16px; margin-top:2px;">
+          <span>Why this works:</span> Every dollar has a defined role tied to evidence — not intuition. The funnel structure resolves what would otherwise look like a contradiction in the data.
         </div>
       </div>
-      <div class="f-stage f-mid">
-        <span class="f-label">Mid Funnel</span>
-        <div class="f-content">
-          <div class="f-title">Consideration — Seasonal demand windows (Mar–Apr and Aug–Sep)</div>
-          <div class="f-detail">Category demand peaks in spring and early fall. Ramp up full-funnel activity 4–6 weeks ahead of each peak — not in reaction to it.</div>
-        </div>
-      </div>
-      <div class="f-stage f-bottom">
-        <span class="f-label">Bottom of Funnel</span>
-        <div class="f-content">
-          <div class="f-title">Conversion — Women 18-24 &amp; Women 25-34</div>
-          <div class="f-detail">$3,500–3,600 cumulative revenue, $1,750–1,800 average per campaign. Conversion-optimised formats, retargeting, promotional bundles. Goal: close the sale.</div>
-        </div>
-      </div>
-    </div>
-    <div class="sowhat">
-      <span>Why this works:</span> Every dollar now has a defined role tied to evidence — not demographic intuition or a single metric ranking. The funnel structure also explains what would otherwise look like a contradiction in the data.
+
     </div>
   </div>
 </section>
