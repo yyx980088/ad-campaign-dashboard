@@ -253,6 +253,41 @@ td {
   vertical-align: middle;
 }
 tr:nth-child(even) td { background: rgba(161,0,255,.04); }
+
+/* ── KPI table (enhanced card style) ── */
+.tbl-kpi {
+  border-collapse: separate;
+  border-spacing: 0 8px;
+  font-size: .88rem;
+}
+.tbl-kpi thead th {
+  background: linear-gradient(135deg, var(--purple) 0%, var(--purple-dk) 100%);
+  color: #fff;
+  padding: 11px 18px;
+  font-size: .76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  border: none;
+}
+.tbl-kpi thead th:first-child { border-radius: 10px 0 0 10px; }
+.tbl-kpi thead th:last-child  { border-radius: 0 10px 10px 0; }
+.tbl-kpi tbody tr td {
+  background: #fff;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 18px;
+  font-size: .84rem;
+  line-height: 1.45;
+  vertical-align: middle;
+  box-shadow: 0 2px 6px rgba(0,0,0,.03);
+}
+.tbl-kpi tbody tr:nth-child(even) td { background: rgba(161,0,255,.035); }
+.tbl-kpi tbody tr td:first-child { border-left: 1px solid var(--border); border-radius: 10px 0 0 10px; }
+.tbl-kpi tbody tr td:last-child  { border-right: 1px solid var(--border); border-radius: 0 10px 10px 0; }
+.tbl-kpi td em { color: var(--muted); font-style: normal; }
+.kpi-name { display: flex; align-items: center; gap: 11px; font-weight: 700; color: var(--dark); font-size: .9rem; }
+.kpi-dot { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 0 0 3px rgba(0,0,0,.04); }
 .chip {
   display: inline-block;
   font-size: .68rem;
@@ -827,40 +862,40 @@ tr:nth-child(even) td { background: rgba(161,0,255,.04); }
     <span class="tag">Measurement</span>
   </div>
   <div class="slide-body">
-    <p class="lead">KPIs are tied to the strategy's objectives — not generic metrics. Each one maps to a specific decision it would trigger.</p>
-    <table style="margin-top:4px;">
+    <p class="lead" style="font-size:1.05rem; line-height:1.7; margin-bottom:18px;">KPIs are tied to the strategy's objectives — not generic metrics. Each one maps to a specific decision it would trigger.</p>
+    <table class="tbl-kpi" style="margin-top:4px;">
       <thead>
         <tr><th>Metric</th><th>Target / Benchmark</th><th>What a miss would trigger</th></tr>
       </thead>
       <tbody>
         <tr>
-          <td><strong>CTR (awareness segments)</strong></td>
+          <td><div class="kpi-name"><span class="kpi-dot" style="background:var(--purple);"></span>CTR (awareness segments)</div></td>
           <td>Sustain ≥32% in male segments</td>
           <td>Creative refresh or format test — not audience swap</td>
         </tr>
         <tr>
-          <td><strong>CPC (seasonal benchmark)</strong></td>
+          <td><div class="kpi-name"><span class="kpi-dot" style="background:var(--amber);"></span>CPC (seasonal benchmark)</div></td>
           <td>Compared to same-month prior cycle, not a flat target<br><em>($0.32 in June is expected — not a red flag)</em></td>
           <td>Investigate competitor bidding or inventory pressure; adjust bid caps</td>
         </tr>
         <tr>
-          <td><strong>ROI per segment</strong></td>
+          <td><div class="kpi-name"><span class="kpi-dot" style="background:var(--green);"></span>ROI per segment</div></td>
           <td>Floor at 670% (lowest observed); optimise toward 850%+ average</td>
           <td>Segment-level budget reallocation; Phase 3 retest trigger</td>
         </tr>
         <tr>
-          <td><strong>Revenue concentration</strong></td>
+          <td><div class="kpi-name"><span class="kpi-dot" style="background:var(--purple-lt);"></span>Revenue concentration</div></td>
           <td>% of total revenue from Women 18-34 — expect 40%+ as spend concentrates</td>
           <td>If flat or declining after Phase 2, review creative effectiveness first</td>
         </tr>
         <tr>
-          <td><strong>Seasonal lift ratio</strong></td>
+          <td><div class="kpi-name"><span class="kpi-dot" style="background:var(--amber);"></span>Seasonal lift ratio</div></td>
           <td>Apr/Sep revenue ≥ 25% above trough-month average</td>
           <td>Validates Phase 1 re-timing hypothesis; if absent, revert and analyse</td>
         </tr>
       </tbody>
     </table>
-    <div class="callout" style="margin-top:14px;">
+    <div class="callout" style="margin-top:12px; padding:13px 20px; font-size:.9rem; line-height:1.55;">
       <strong>Principle behind the KPI design:</strong> Each metric maps to a decision, not just a score. CPC benchmarked seasonally — not as a flat target — prevents penalising high-demand periods where paying more is still profitable.
     </div>
   </div>
