@@ -1,6 +1,7 @@
 # Ad Campaign Performance Dashboard
 
 **Live Dashboard:** https://yyx980088.github.io/ad-campaign-dashboard/
+**Strategy Deck:** https://yyx980088.github.io/ad-campaign-dashboard/accenture_deck.html
 
 ---
 
