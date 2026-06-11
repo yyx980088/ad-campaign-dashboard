@@ -226,6 +226,11 @@
 .stat .s-label { font-size: .72rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .5px; margin-top: 4px; }
 .stat .s-note  { font-size: .72rem; color: var(--muted); margin-top: 2px; }
 
+.stat-lg { padding: 20px 24px; }
+.stat-lg .s-val { font-size: 2.3rem; }
+.stat-lg .s-label { font-size: .8rem; margin-top: 6px; }
+.stat-lg .s-note { font-size: .82rem; margin-top: 4px; }
+
 /* ── Tables ── */
 table {
   width: 100%;
@@ -366,6 +371,9 @@ tr:nth-child(even) td { background: rgba(161,0,255,.04); }
 .conf-item span { color: var(--muted); font-size: .8rem; }
 
 /* ── Appendix ── */
+.tbl-compact th, .tbl-compact td { padding: 5px 8px; font-size: .7rem; }
+.col-label { font-size:.67rem; font-weight:700; text-transform:uppercase; letter-spacing:1.2px; color:var(--muted); margin-bottom:2px; }
+
 .qa-item { margin-bottom: 14px; }
 .qa-q { font-size: .84rem; font-weight: 700; color: var(--purple-dk); margin-bottom: 4px; }
 .qa-a { font-size: .8rem; color: #333; line-height: 1.5; background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 9px 13px; }
@@ -454,6 +462,43 @@ tr:nth-child(even) td { background: rgba(161,0,255,.04); }
   color: var(--purple-lt);
   flex-shrink: 0;
 }
+
+/* ── Table of contents (title slide) ── */
+.toc { margin: 6px 0 28px; }
+.toc-title {
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--purple-lt);
+  margin-bottom: 14px;
+}
+.toc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 36px;
+}
+.toc-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: .88rem;
+  color: #ddd;
+}
+.toc-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  background: rgba(161,0,255,.18);
+  border: 1px solid rgba(161,0,255,.4);
+  color: var(--purple-lt);
+  font-size: .76rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
 </style>
 </head>
 <body>
@@ -476,6 +521,19 @@ tr:nth-child(even) td { background: rgba(161,0,255,.04); }
     </div>
     <div class="dl-arrow">↗</div>
   </a>
+
+  <div class="toc">
+    <div class="toc-title">Agenda</div>
+    <div class="toc-grid">
+      <div class="toc-item"><span class="toc-num">1</span>Client Overview &amp; Strategic Bottom Line</div>
+      <div class="toc-item"><span class="toc-num">2</span>From Insight to Strategy — The Full-Funnel Approach</div>
+      <div class="toc-item"><span class="toc-num">3</span>HOW (1/2): Execution &amp; Rollout</div>
+      <div class="toc-item"><span class="toc-num">4</span>HOW (2/2): Confidence &amp; What I'd Test Next</div>
+      <div class="toc-item"><span class="toc-num">5</span>KPIs — How We'll Know if It's Working</div>
+      <div class="toc-item"><span class="toc-num">6</span>Summary</div>
+      <div class="toc-item"><span class="toc-num">A</span>Appendix — Anticipated Questions</div>
+    </div>
+  </div>
 
   <div class="meta-row">
     <div><strong>Presented by</strong><br>Yanxin Tan</div>
@@ -522,36 +580,36 @@ tr:nth-child(even) td { background: rgba(161,0,255,.04); }
     </div>
 
     <!-- ── Stats + Key findings ── -->
-    <div class="cols cols-2" style="flex:1; gap:20px; align-items:start;">
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-        <div class="stat">
+    <div class="cols cols-2" style="flex:1; gap:28px;">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; align-content:center; height:100%;">
+        <div class="stat stat-lg">
           <div class="s-val">~8×</div>
           <div class="s-label">Avg. Return on Ad Spend</div>
           <div class="s-note">$7.90–$9.10 profit per $1 spent</div>
         </div>
-        <div class="stat">
+        <div class="stat stat-lg">
           <div class="s-val">813%</div>
           <div class="s-label">Average ROI</div>
           <div class="s-note">Range: 673% – 1,100%</div>
         </div>
-        <div class="stat">
+        <div class="stat stat-lg">
           <div class="s-val">$16,900</div>
           <div class="s-label">Total Revenue Generated</div>
           <div class="s-note">Across $1,896 in total spend</div>
         </div>
-        <div class="stat">
+        <div class="stat stat-lg">
           <div class="s-val">33.3%</div>
           <div class="s-label">Peak CTR</div>
           <div class="s-note">Men 45-54, Jun 19</div>
         </div>
       </div>
-      <div style="display:flex; flex-direction:column; gap:10px;">
-        <div style="font-size:.67rem; font-weight:700; text-transform:uppercase; letter-spacing:1.2px; color:var(--muted); margin-bottom:2px;">Key Observations</div>
-        <ul class="blist" style="margin-bottom:4px;">
-          <li>The audiences driving the most clicks are not the same audiences driving the most revenue, revealing a clear opportunity to restructure how budget is allocated across segments.</li>
-          <li>The campaign's spend timing does not align with Malaysia's festive buying calendar, leaving demand peaks around Hari Raya and Deepavali underserved.</li>
+      <div style="display:flex; flex-direction:column; gap:18px; justify-content:center; height:100%;">
+        <div style="font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:1.2px; color:var(--muted); margin-bottom:2px;">Key Observations</div>
+        <ul class="blist" style="margin-bottom:4px; gap:18px; font-size:.95rem;">
+          <li style="font-size:.95rem;">The audiences driving the most clicks are not the same audiences driving the most revenue, revealing a clear opportunity to restructure how budget is allocated across segments.</li>
+          <li style="font-size:.95rem;">The campaign's spend timing does not align with Malaysia's festive buying calendar, leaving demand peaks around Hari Raya and Deepavali underserved.</li>
         </ul>
-        <div class="callout">
+        <div class="callout" style="font-size:.95rem; padding:16px 18px;">
           <strong>Bottom line:</strong> The campaign is already profitable — the opportunity is to restructure budget by audience <em>role</em> and shift timing <em>ahead</em> of festive demand peaks. <strong>Same budget, working harder.</strong>
         </div>
       </div>
@@ -561,21 +619,21 @@ tr:nth-child(even) td { background: rgba(161,0,255,.04); }
 </section>
 
 <!-- ════════════════════════════════════════════
-     SLIDE 4 — CORE FINDING + STRATEGY (COMBINED)
+     SLIDE 3 — CORE FINDING + SEASONALITY + STRATEGY (COMBINED)
 ════════════════════════════════════════════ -->
 <section class="content">
   <div class="slide-header">
     <div class="num">2</div>
     <h2>From Insight to Strategy — The Full-Funnel Approach</h2>
-    <span class="tag">Insight · Recommendation</span>
+    <span class="tag">Insight · Seasonality · Recommendation</span>
   </div>
   <div class="slide-body">
     <div class="cols cols-2" style="flex:1; gap:20px;">
 
-      <!-- LEFT — Core Finding -->
-      <div style="display:flex; flex-direction:column; gap:10px;">
-        <div style="font-size:.67rem; font-weight:700; text-transform:uppercase; letter-spacing:1.2px; color:var(--muted); margin-bottom:2px;">The Core Finding</div>
-        <table>
+      <!-- LEFT — Core Finding + Seasonality -->
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <div class="col-label">The Core Finding</div>
+        <table class="tbl-compact">
           <thead>
             <tr><th>Segment</th><th>CTR</th><th>Cumulative Revenue</th></tr>
           </thead>
@@ -587,38 +645,55 @@ tr:nth-child(even) td { background: rgba(161,0,255,.04); }
             <tr><td>Women, 25-34</td><td>30.3% avg</td><td><strong>$3,500</strong> <span class="chip chip-purple">Top</span></td></tr>
           </tbody>
         </table>
-        <div class="callout callout-green" style="margin-top:2px;">
+        <div class="callout callout-green" style="padding:10px 13px; font-size:.8rem;">
           <strong>The insight:</strong> High CTR ≠ high revenue. These audiences aren't competing — they play <em>different roles</em>. Male segments drive efficient reach; Women 18-34 drive conversion. The strategy uses both, for different jobs.
+        </div>
+
+        <div class="col-label" style="margin-top:6px;">Seasonal Demand Pattern</div>
+        <table class="tbl-compact">
+          <thead><tr><th>Month</th><th>Revenue</th><th>Signal</th></tr></thead>
+          <tbody>
+            <tr><td>Apr 21</td><td>$1,900</td><td><span class="chip chip-green">Peak · Raya</span></td></tr>
+            <tr><td>May 20</td><td>$1,500</td><td><span class="chip chip-amber">Trough</span></td></tr>
+            <tr><td>Sep 16</td><td><strong>$2,000</strong></td><td><span class="chip chip-green">Peak · Year-end</span></td></tr>
+            <tr><td>Oct 15</td><td>$1,500</td><td><span class="chip chip-amber">Trough</span></td></tr>
+          </tbody>
+        </table>
+        <div class="callout" style="padding:10px 13px; font-size:.8rem;">
+          <strong>The opportunity:</strong> The Apr peak aligns with <strong>Hari Raya Aidilfitri</strong> open-house culture, while the Sep peak likely reflects early prep for <strong>Deepavali</strong> and year-end hosting. Re-timing a portion of low-season spend to arrive ahead of these peaks captures more revenue without new budget — <strong>same dollars, better placed</strong>.
+        </div>
+        <div class="callout callout-amber" style="padding:10px 13px; font-size:.8rem;">
+          <strong>What I'm not yet confident about:</strong> This is based on a single annual cycle — one year isn't enough to call this statistically seasonal vs. coincidental.
         </div>
       </div>
 
-      <!-- RIGHT — Strategy -->
-      <div style="display:flex; flex-direction:column; gap:10px;">
-        <div style="font-size:.67rem; font-weight:700; text-transform:uppercase; letter-spacing:1.2px; color:var(--muted); margin-bottom:2px;">The Full-Funnel Strategy</div>
-        <div class="funnel" style="gap:8px;">
-          <div class="f-stage f-top">
-            <span class="f-label">Top of Funnel</span>
+      <!-- RIGHT — Strategy (enlarged) -->
+      <div style="display:flex; flex-direction:column; gap:18px; flex:1; justify-content:center;">
+        <div class="col-label">The Full-Funnel Strategy</div>
+        <div class="funnel" style="gap:18px;">
+          <div class="f-stage f-top" style="padding:22px 26px;">
+            <span class="f-label" style="font-size:.82rem; padding:5px 14px;">Top of Funnel</span>
             <div class="f-content">
-              <div class="f-title">Awareness — Male Segments (45-54, 35-44, 18-24)</div>
-              <div class="f-detail">CTR 32–33% → cost-efficient reach. Broad-reach formats built for impressions and clicks, not conversion.</div>
+              <div class="f-title" style="font-size:1.05rem;">Awareness — Male Segments (45-54, 35-44, 18-24)</div>
+              <div class="f-detail" style="font-size:.92rem;">CTR 32–33% → cost-efficient reach. Broad-reach formats built for impressions and clicks, not conversion.</div>
             </div>
           </div>
-          <div class="f-stage f-mid">
-            <span class="f-label">Mid Funnel</span>
+          <div class="f-stage f-mid" style="padding:22px 26px;">
+            <span class="f-label" style="font-size:.82rem; padding:5px 14px;">Mid Funnel</span>
             <div class="f-content">
-              <div class="f-title">Consideration — Festive demand windows</div>
-              <div class="f-detail">Ramp up 4–6 weeks ahead of Hari Raya (Mar–Apr) and Deepavali/year-end (Aug–Sep) peaks — not in reaction to them.</div>
+              <div class="f-title" style="font-size:1.05rem;">Consideration — Festive Demand Windows</div>
+              <div class="f-detail" style="font-size:.92rem;">Ramp up 4–6 weeks ahead of Hari Raya (Mar–Apr) and Deepavali/year-end (Aug–Sep) peaks — not in reaction to them.</div>
             </div>
           </div>
-          <div class="f-stage f-bottom">
-            <span class="f-label">Bottom of Funnel</span>
+          <div class="f-stage f-bottom" style="padding:22px 26px;">
+            <span class="f-label" style="font-size:.82rem; padding:5px 14px;">Bottom of Funnel</span>
             <div class="f-content">
-              <div class="f-title">Conversion — Women 18-24 &amp; Women 25-34</div>
-              <div class="f-detail">Highest cumulative revenue. Retargeting, shoppable posts, festive UGC — optimised to close the sale.</div>
+              <div class="f-title" style="font-size:1.05rem;">Conversion — Women 18-24 &amp; Women 25-34</div>
+              <div class="f-detail" style="font-size:.92rem;">Highest cumulative revenue. Retargeting, shoppable posts, festive UGC — optimised to close the sale.</div>
             </div>
           </div>
         </div>
-        <div class="sowhat" style="font-size:.78rem; padding:12px 16px; margin-top:2px;">
+        <div class="sowhat" style="font-size:.92rem; padding:18px 20px;">
           <span>Why this works:</span> Every dollar has a defined role tied to evidence — not intuition. The funnel structure resolves what would otherwise look like a contradiction in the data.
         </div>
       </div>
@@ -628,116 +703,117 @@ tr:nth-child(even) td { background: rgba(161,0,255,.04); }
 </section>
 
 <!-- ════════════════════════════════════════════
-     SLIDE 6 — SEASONALITY
-════════════════════════════════════════════ -->
-<section class="content">
-  <div class="slide-header">
-    <div class="num">4</div>
-    <h2>Seasonality — A Pattern the Current Plan Isn't Exploiting</h2>
-    <span class="tag">Data Evidence</span>
-  </div>
-  <div class="slide-body">
-    <div class="cols cols-2" style="flex:1; gap:20px;">
-      <div>
-        <p class="lead">Two demand peaks emerge clearly — consistent with how people actually shop for interior décor.</p>
-        <table>
-          <thead><tr><th>Month</th><th>Impressions</th><th>Revenue</th><th>Signal</th></tr></thead>
-          <tbody>
-            <tr><td>Apr 21</td><td>25,000</td><td>$1,900</td><td><span class="chip chip-green">Peak 1</span></td></tr>
-            <tr><td>May 20</td><td>17,000</td><td>$1,500</td><td><span class="chip chip-amber">Trough</span></td></tr>
-            <tr><td>Sep 16</td><td><strong>26,000</strong></td><td><strong>$2,000</strong></td><td><span class="chip chip-green">Peak 2 · Best month</span></td></tr>
-            <tr><td>Oct 15</td><td>18,000</td><td>$1,500</td><td><span class="chip chip-amber">Trough</span></td></tr>
-          </tbody>
-        </table>
-        <div class="callout callout-green" style="margin-top:12px;">
-          <strong>Real-world alignment:</strong> The Mar–Apr peak aligns closely with <strong>Hari Raya Aidilfitri</strong>, Malaysia's largest festive season — a period where home redecoration, new furnishings, and full interior refreshes are deeply embedded in open house (rumah terbuka) culture. The Sep peak likely reflects early year-end festive preparation, ahead of <strong>Deepavali</strong> (typically Oct–Nov) and the broader year-end hosting and gifting season.
-        </div>
-      </div>
-      <div style="display:flex; flex-direction:column; gap:10px;">
-        <div class="callout">
-          <strong>The opportunity:</strong> Re-timing a portion of low-season spend to arrive ahead of each demand peak captures more revenue without committing new budget — <strong>same dollars, better placed</strong>.
-        </div>
-        <div class="callout callout-amber">
-          <strong>What I'm not yet confident about:</strong> This is based on a single annual cycle. One year isn't enough to call this statistically seasonal vs. coincidental. Phase 1 of the roadmap (re-timing only, no new creative) is deliberately low-commitment so we can test the hypothesis before betting the full plan on it.
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════════════════════════════
      SLIDE 9 — EXECUTION + ROADMAP (COMBINED)
 ════════════════════════════════════════════ -->
 <section class="content">
   <div class="slide-header">
-    <div class="num">5</div>
+    <div class="num">3</div>
     <h2>HOW (1/2): Execution &amp; Rollout</h2>
     <span class="tag">Execution · Implementation</span>
   </div>
   <div class="slide-body">
-    <div class="cols cols-2" style="flex:1; gap:20px;">
+    <div class="cols cols-2" style="gap:12px;">
 
       <!-- LEFT — Creative formats -->
-      <div style="display:flex; flex-direction:column; gap:10px;">
+      <div style="display:flex; flex-direction:column; gap:6px;">
         <div style="font-size:.67rem; font-weight:700; text-transform:uppercase; letter-spacing:1.2px; color:var(--muted); margin-bottom:2px;">What — Creative by Funnel Role</div>
 
-        <div style="display:flex;align-items:center;gap:8px;background:rgba(161,0,255,.08);border-radius:8px;padding:7px 11px;">
+        <div style="display:flex;align-items:center;gap:8px;background:rgba(161,0,255,.08);border-radius:8px;padding:5px 11px;">
           <span style="width:8px;height:8px;border-radius:50%;background:var(--purple);flex-shrink:0;display:inline-block;"></span>
-          <span style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--purple-dk);">Top of Funnel — Male Segments (Awareness)</span>
+          <span style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--purple-dk);">Top of Funnel — Male Segments (Awareness)</span>
         </div>
-        <ul class="blist" style="margin-bottom:4px;">
-          <li><strong>Format:</strong> Short-form video, "shop the look" carousels, broad-reach display</li>
-          <li><strong>Creative:</strong> Aspirational interiors styled for Raya open houses and year-end hosting</li>
+        <ul class="blist" style="margin-bottom:2px; gap:4px; font-size:.78rem;">
+          <li style="font-size:.78rem;"><strong>Format:</strong> Short-form video, "shop the look" carousels, broad-reach display</li>
+          <li style="font-size:.78rem;"><strong>Creative:</strong> Aspirational interiors styled for Raya open houses and year-end hosting</li>
         </ul>
 
-        <div style="display:flex;align-items:center;gap:8px;background:rgba(46,196,182,.10);border-radius:8px;padding:7px 11px;">
+        <div style="display:flex;align-items:center;gap:8px;background:rgba(46,196,182,.10);border-radius:8px;padding:5px 11px;">
           <span style="width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0;display:inline-block;"></span>
-          <span style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#1a7a73;">Bottom of Funnel — Women 18-34 (Conversion)</span>
+          <span style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#1a7a73;">Bottom of Funnel — Women 18-34 (Conversion)</span>
         </div>
-        <ul class="blist">
-          <li><strong>Format:</strong> Shoppable posts, retargeting with bundle offers</li>
-          <li><strong>Creative:</strong> UGC "before and after" Raya and festive home transformations</li>
+        <ul class="blist" style="gap:4px;">
+          <li style="font-size:.78rem;"><strong>Format:</strong> Shoppable posts, retargeting with bundle offers</li>
+          <li style="font-size:.78rem;"><strong>Creative:</strong> UGC "before and after" Raya and festive home transformations</li>
         </ul>
 
-        <div class="callout callout-amber" style="margin-top:2px;">
+        <div class="callout callout-amber" style="margin-top:2px; padding:6px 11px; font-size:.74rem; line-height:1.35;">
           <strong>Safeguard:</strong> Creative rotation built in from day one — avoids audience fatigue and CPC creep as spend concentrates.
         </div>
       </div>
 
       <!-- RIGHT — Roadmap -->
-      <div style="display:flex; flex-direction:column; gap:10px;">
+      <div style="display:flex; flex-direction:column; gap:6px;">
         <div style="font-size:.67rem; font-weight:700; text-transform:uppercase; letter-spacing:1.2px; color:var(--muted); margin-bottom:2px;">When — 90-Day Phased Rollout</div>
-        <div class="phases" style="gap:8px;">
-          <div class="phase">
-            <div class="p-num">Phase 1</div>
+        <div class="phases" style="gap:6px;">
+          <div class="phase" style="padding:6px 12px; gap:10px;">
+            <div class="p-num" style="font-size:.7rem; padding:3px 9px;">Phase 1</div>
             <div style="flex:1;">
-              <div class="p-title">Re-time existing spend — no new creative</div>
-              <div class="p-detail">Shift May/Oct budget into Feb/Aug ahead of Raya and year-end peaks. Lowest-risk move: same dollars, better timing.</div>
+              <div class="p-title" style="font-size:.78rem; margin-bottom:1px;">Re-time existing spend — no new creative</div>
+              <div class="p-detail" style="font-size:.72rem; line-height:1.3;">Shift May/Oct budget into Feb/Aug ahead of Raya and year-end peaks. Lowest-risk move: same dollars, better timing.</div>
             </div>
             <div class="p-time">0–30 days</div>
           </div>
-          <div class="phase">
-            <div class="p-num">Phase 2</div>
+          <div class="phase" style="padding:6px 12px; gap:10px;">
+            <div class="p-num" style="font-size:.7rem; padding:3px 9px;">Phase 2</div>
             <div style="flex:1;">
-              <div class="p-title">Launch funnel-split creative</div>
-              <div class="p-detail">Awareness formats to male segments; conversion formats (shoppable, UGC, retargeting) to Women 18-34. Review Phase 1 read first.</div>
+              <div class="p-title" style="font-size:.78rem; margin-bottom:1px;">Launch funnel-split creative</div>
+              <div class="p-detail" style="font-size:.72rem; line-height:1.3;">Awareness formats to male segments; conversion formats (shoppable, UGC, retargeting) to Women 18-34. Review Phase 1 read first.</div>
             </div>
             <div class="p-time">30–60 days</div>
           </div>
-          <div class="phase">
-            <div class="p-num">Phase 3</div>
+          <div class="phase" style="padding:6px 12px; gap:10px;">
+            <div class="p-num" style="font-size:.7rem; padding:3px 9px;">Phase 3</div>
             <div style="flex:1;">
-              <div class="p-title">Retest Women 35-44 — close the open question</div>
-              <div class="p-detail">Two consistent campaigns with fresh creative. Decide to scale or retire based on segment ROI data.</div>
+              <div class="p-title" style="font-size:.78rem; margin-bottom:1px;">Retest Women 35-44 — close the open question</div>
+              <div class="p-detail" style="font-size:.72rem; line-height:1.3;">Two consistent campaigns with fresh creative. Decide to scale or retire based on segment ROI data.</div>
             </div>
             <div class="p-time">60–90 days</div>
           </div>
         </div>
-        <div class="sowhat" style="font-size:.78rem; padding:12px 16px; margin-top:2px;">
+        <div class="sowhat" style="font-size:.74rem; padding:8px 14px; margin-top:0;">
           Each phase is a checkpoint — <span>no commitment to the next step until the current one generates a read.</span>
         </div>
       </div>
 
+    </div>
+
+    <!-- Illustrative example — low-key, not a commitment -->
+    <div style="margin-top:10px; padding:12px 16px 11px; border:1px dashed #ddd6e6; border-radius:10px; background:linear-gradient(135deg,#fbfafd,#f6f3fa);">
+      <div style="display:flex; align-items:center; gap:6px; margin-bottom:8px;">
+        <span style="display:inline-block; width:5px; height:5px; border-radius:50%; background:#c9bfdb;"></span>
+        <div style="font-size:.66rem; font-weight:700; text-transform:uppercase; letter-spacing:1.2px; color:#b3a9c4;">Illustrative Timeline — If Rollout Began January 2027</div>
+      </div>
+      <table style="width:100%; border-collapse:separate; border-spacing:0; font-size:.72rem; color:#9b91ab;">
+        <thead>
+          <tr>
+            <th style="text-align:left; padding:5px 10px; font-weight:700; font-size:.64rem; text-transform:uppercase; letter-spacing:.6px; color:#b3a9c4; border-bottom:1px solid #e4dcef;">Phase</th>
+            <th style="text-align:left; padding:5px 10px; font-weight:700; font-size:.64rem; text-transform:uppercase; letter-spacing:.6px; color:#b3a9c4; border-bottom:1px solid #e4dcef;">Calendar Window</th>
+            <th style="text-align:left; padding:5px 10px; font-weight:700; font-size:.64rem; text-transform:uppercase; letter-spacing:.6px; color:#b3a9c4; border-bottom:1px solid #e4dcef;">Action</th>
+            <th style="text-align:left; padding:5px 10px; font-weight:700; font-size:.64rem; text-transform:uppercase; letter-spacing:.6px; color:#b3a9c4; border-bottom:1px solid #e4dcef;">Decision Gate Before Next Phase</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:rgba(161,0,255,.025);">
+            <td style="padding:7px 10px; vertical-align:top; white-space:nowrap;"><span style="display:inline-block; background:#ece4f7; color:#9c7fc2; font-weight:700; font-size:.7rem; padding:3px 10px; border-radius:999px;">Phase 1</span></td>
+            <td style="padding:7px 10px; vertical-align:top; white-space:nowrap; color:#a89cbb; font-weight:600;">Jan 1 – Jan 30, 2027</td>
+            <td style="padding:7px 10px; vertical-align:top; line-height:1.35;">Shift the budget normally spent in May/Oct toward Feb and Aug 2027. No new creative — just re-allocate existing campaigns/dollars earlier in the calendar.</td>
+            <td style="padding:7px 10px; vertical-align:top; line-height:1.35;">By ~Jan 30: is early Feb spend pacing/CTR in line with expectations (no major drop-off from re-timing)? If yes → proceed to Phase 2.</td>
+          </tr>
+          <tr style="background:rgba(161,0,255,.05);">
+            <td style="padding:7px 10px; vertical-align:top; white-space:nowrap;"><span style="display:inline-block; background:#e4d6f5; color:#8c64b8; font-weight:700; font-size:.7rem; padding:3px 10px; border-radius:999px;">Phase 2</span></td>
+            <td style="padding:7px 10px; vertical-align:top; white-space:nowrap; color:#9d8cb4; font-weight:600;">Jan 31 – Mar 1, 2027</td>
+            <td style="padding:7px 10px; vertical-align:top; line-height:1.35;">Launch the funnel-split creative: awareness-style ads to Men 45-54/35-44/18-24; conversion-style (shoppable, UGC, retargeting) to Women 18-24/25-34.</td>
+            <td style="padding:7px 10px; vertical-align:top; line-height:1.35;">By ~Mar 1: is revenue/CTR by segment tracking the predicted funnel roles (men driving cheap reach, women driving conversions)? If consistent → proceed to Phase 3.</td>
+          </tr>
+          <tr style="background:rgba(161,0,255,.075);">
+            <td style="padding:7px 10px; vertical-align:top; white-space:nowrap;"><span style="display:inline-block; background:#dcc8f1; color:#7c4ead; font-weight:700; font-size:.7rem; padding:3px 10px; border-radius:999px;">Phase 3</span></td>
+            <td style="padding:7px 10px; vertical-align:top; white-space:nowrap; color:#937eac; font-weight:600;">Mar 2 – Mar 31, 2027</td>
+            <td style="padding:7px 10px; vertical-align:top; line-height:1.35;">Run a fresh, consistent 2-campaign test on Women 35-44 to settle whether their earlier underperformance was the audience or just weak creative/timing.</td>
+            <td style="padding:7px 10px; vertical-align:top; line-height:1.35;">By ~Mar 31: ROI data → scale Women 35-44 into the funnel or retire the segment.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="font-size:.66rem; color:#c2b9d0; margin-top:7px; font-style:italic;">For illustration only — actual dates would be confirmed against the live campaign calendar and the 2027 Hari Raya date before lock-in.</div>
     </div>
   </div>
 </section>
@@ -747,7 +823,7 @@ tr:nth-child(even) td { background: rgba(161,0,255,.04); }
 ════════════════════════════════════════════ -->
 <section class="content">
   <div class="slide-header">
-    <div class="num">6</div>
+    <div class="num">4</div>
     <h2>HOW (2/2): Confidence &amp; What I'd Test Next</h2>
     <span class="tag">Analytical Rigour</span>
   </div>
@@ -784,7 +860,7 @@ tr:nth-child(even) td { background: rgba(161,0,255,.04); }
 ════════════════════════════════════════════ -->
 <section class="content">
   <div class="slide-header">
-    <div class="num">9</div>
+    <div class="num">5</div>
     <h2>KPIs — How We'll Know if It's Working</h2>
     <span class="tag">Measurement</span>
   </div>
@@ -833,7 +909,7 @@ tr:nth-child(even) td { background: rgba(161,0,255,.04); }
 ════════════════════════════════════════════ -->
 <section class="content">
   <div class="slide-header">
-    <div class="num">10</div>
+    <div class="num">6</div>
     <h2>Summary</h2>
     <span class="tag">Close</span>
   </div>
