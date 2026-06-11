@@ -345,25 +345,25 @@ tr:nth-child(even) td { background: rgba(161,0,255,.04); }
 /* ── Confidence matrix ── */
 .conf-row {
   display: grid;
-  grid-template-columns: 110px 1fr 1fr;
-  gap: 10px;
+  grid-template-columns: 120px 1fr 1fr;
+  gap: 16px;
   align-items: center;
-  margin-bottom: 8px;
-  font-size: .8rem;
+  margin-bottom: 16px;
+  font-size: .85rem;
 }
 .conf-badge {
-  font-size: .7rem;
+  font-size: .75rem;
   font-weight: 700;
-  padding: 4px 10px;
+  padding: 6px 12px;
   border-radius: 999px;
   text-align: center;
 }
 .conf-high { background: rgba(46,196,182,.15); color: #1a7a73; }
 .conf-low  { background: rgba(244,162,97,.18); color: #b56b1e; }
 .conf-open { background: rgba(230,57,70,.12);  color: #c0112a; }
-.conf-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; line-height: 1.4; }
-.conf-item strong { display: block; color: var(--dark); margin-bottom: 2px; }
-.conf-item span { color: var(--muted); font-size: .75rem; }
+.conf-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; line-height: 1.5; }
+.conf-item strong { display: block; color: var(--dark); margin-bottom: 4px; font-size: .9rem; }
+.conf-item span { color: var(--muted); font-size: .8rem; }
 
 /* ── Appendix ── */
 .qa-item { margin-bottom: 14px; }
@@ -752,8 +752,8 @@ tr:nth-child(even) td { background: rgba(161,0,255,.04); }
     <span class="tag">Analytical Rigour</span>
   </div>
   <div class="slide-body">
-    <p class="lead">Recommending action on thin evidence carries its own risk. Here's what the data supports confidently, and where I'd validate before committing further spend.</p>
-    <div class="conf-row" style="font-size:.72rem; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.5px; margin-bottom:4px;">
+    <p class="lead" style="font-size:1.05rem; line-height:1.7; margin-bottom:28px;">Recommending action on thin evidence carries its own risk. Here's what the data supports confidently, and where I'd validate before committing further spend.</p>
+    <div class="conf-row" style="font-size:.8rem; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.8px; margin-bottom:14px;">
       <div>Confidence</div><div>Finding</div><div>Basis / Next step</div>
     </div>
     <div class="conf-row">
